@@ -4,7 +4,7 @@ import connectDb from './config/dbConnection.js';
 import studentRoute from './routes/studentRoute.js';
 import teacherRoute from './routes/teacherRoutes.js';
 import departmentRoute from './routes/departmentRoute.js';
-
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 dotenv.config();
@@ -13,6 +13,7 @@ connectDb();
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use(cookieParser());

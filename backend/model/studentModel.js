@@ -5,12 +5,17 @@ const studentSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  enrolledCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
+  status: {
+    type: String,
+    enum: ['active', 'inactive', 'dropped'],
+    default: 'active',
+  },
+  enrolledAt: { type: Date, default: Date.now },
   classTeacher: { type: mongoose.Schema.Types.ObjectId, ref: 'ClassTeacher' },
   teachers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' }],
   assignments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Assignment' }],
   grades: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Grade' }],
-  enrolledCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
+  department: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Department' }],
   createdAt: { type: Date, default: Date.now },
 });
 
