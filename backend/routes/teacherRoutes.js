@@ -1,4 +1,5 @@
 import express from 'express';
+import { isAdmin } from '../middlewares/authMiddlewares.js';
 import {
   createTeacher,
   teacherLogin,
@@ -9,7 +10,7 @@ import {
 
 const router = express.Router();
 
-router.post('/register', createTeacher);
+router.post('/register', isAdmin, createTeacher);
 router.post('/login', teacherLogin);
 router.post('/logout', logoutTeacher);
 router.get('/allTeachers', getAllTeachers);
