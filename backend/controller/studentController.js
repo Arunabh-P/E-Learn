@@ -39,13 +39,11 @@ export const studentlogin = asyncHandler(async (req, res, next) => {
     if (!isMatch)
       return res.status(401).send({ message: 'Authentifiaction faild' });
 
-    const token = jwt.sign(
-      { studentId: student._id },
-      process.env.JWT_SECRETE,
-      { expiresIn: '10d' }
-    );
+    const token = jwt.sign({ studentId: student._id }, process.env.JWT_SECRET, {
+      expiresIn: '10d',
+    });
     res
-      .cookie('token', token, { maxAge: 3600000, httpOnly: true })
+      .cookie('studentToken', token, { maxAge: 3600000, httpOnly: true })
       .status(200)
       .send({ message: 'Logged in successfully' });
   } catch (error) {
@@ -57,7 +55,7 @@ export const studentlogin = asyncHandler(async (req, res, next) => {
 export const logoutStudent = asyncHandler(async (req, res, next) => {
   try {
     res
-      .clearCookie('token', {
+      .clearCookie('studentToken', {
         sameSite: 'none',
         secure: true,
       })
