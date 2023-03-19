@@ -1,0 +1,119 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.ant-layout {
+  min-height: 100vh;
+
+  background-color: #f2f5f5 !important;
+}
+.ant-menu-dark,
+.ant-menu-inline,
+.ant-layout-sider,
+.ant-menu {
+  background-color: #296862 !important;
+}
+
+:where(.css-dev-only-do-not-override-diro6f).ant-menu-dark
+  .ant-menu-item-selected {
+  background-color: #1b4440 !important;
+}
+.sm-logo {
+  display: none;
+}
+
+.ant-layout-sider-collapsed .sm-logo {
+  display: block;
+}
+.ant-layout-sider-collapsed .lg-logo {
+  display: none;
+}
+main {
+  overflow: scroll;
+}
+main {
+  height: 85vh;
+  overflow-y: scroll;
+  background-color: transparent !important;
+}
+main::-webkit-scrollbar {
+  width: 0px;
+}
+.ant-menu-title-content {
+  font-size: 16px;
+}
+.ant-layout-header h5 {
+  line-height: 20px;
+  font-size: 14px;
+}
+.ant-layout-header p {
+  line-height: 20px;
+  font-size: 13px;
+}
+.ant-layout-header div .badge {
+  top: 16px;
+  right: -6px;
+}
+
+:root {
+  --color-black: #212529;
+  --color-yellow: #ffd333;
+  --color-green: #47ad24;
+  --color-red: #e52e2e;
+  --color-violet: #828599;
+  --color-lite-red: #ed464d;
+  --color-gray: #ced4da;
+  --color-white: #ffff;
+}
+
+.green {
+  color: var(--color-green);
+  font-size: 14px;
+  font-family: Roboto !important;
+}
+.red {
+  color: var(--color-red);
+  font-size: 14px;
+  font-family: Roboto !important;
+}
+.quill {
+  background-color: var(--color-white);
+}
+.form-control {
+  box-shadow: none;
+  border-color: var(--color-gray);
+}
+.title {
+  font: 28px;
+  font-family: Roboto !important;
+  color: var(--color-black);
+}
+
+.sub-title {
+  font: 24px;
+  font-family: Roboto !important;
+  color: var(--color-black);
+}
+.desc {
+  font: 14px;
+  font-family: Roboto !important;
+  color: var(--color-violet);
+}
