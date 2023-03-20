@@ -62,7 +62,11 @@ export const addStudentToDeparttment = asyncHandler(async (req, res, next) => {
 export const getAllDepartments = asyncHandler(async (req, res, next) => {
   try {
     const departments = await Department.find();
-    res.send(departments);
+    // res.send(departments);
+    res.status(200).json({
+      success: true,
+      departments,
+    });
   } catch (error) {
     next(err);
   }

@@ -39,16 +39,24 @@ export const teacherLogin = asyncHandler(async (req, res, next) => {
     if (!isMatch)
       return res.status(401).send({ message: 'Authentifiaction faild' });
 
-    const token = jwt.sign({ teacherId: teacher._id }, process.env.JWT_SECRET, {
-      expiresIn: '10d',
-    });
+    const token = jwt.sign(
+      { email: teacher.email, teacherId: teacher._id },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '1h',
+      }
+    );
+
     res
-      .status(200)
-      .cookie('teacherToken', token, { maxAge: 3600000, httpOnly: true })
+      .cookie('teacherToken', token, {
+        httpOnly: true,
+        signed: true,
+        maxAge: 900000,
+      })
       .json({
-        _id: teacher._id,
-        email: teacher.email,
-        token: token,
+        success: true,
+        teacher,
+        token,
       });
   } catch (error) {
     next(error);
