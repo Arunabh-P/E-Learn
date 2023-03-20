@@ -43,9 +43,13 @@ export const teacherLogin = asyncHandler(async (req, res, next) => {
       expiresIn: '10d',
     });
     res
-      .cookie('teacherToken', token, { maxAge: 3600000, httpOnly: true })
       .status(200)
-      .send({ message: 'Logged in successfully' });
+      .cookie('teacherToken', token, { maxAge: 3600000, httpOnly: true })
+      .json({
+        _id: teacher._id,
+        email: teacher.email,
+        token: token,
+      });
   } catch (error) {
     next(error);
   }

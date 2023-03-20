@@ -4,6 +4,7 @@ import Student from '../model/studentModel.js';
 
 import asyncHandler from 'express-async-handler';
 
+// create department
 export const createDepartment = asyncHandler(async (req, res, next) => {
   try {
     const { name } = req.body;
@@ -29,6 +30,7 @@ export const createDepartment = asyncHandler(async (req, res, next) => {
   }
 });
 
+// add student into department
 export const addStudentToDeparttment = asyncHandler(async (req, res, next) => {
   const { studentId } = req.body;
   try {
@@ -51,6 +53,28 @@ export const addStudentToDeparttment = asyncHandler(async (req, res, next) => {
     department.students.push(student);
     await department.save();
     res.json({ message: 'Student added to department successfully' });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// get all department
+export const getAllDepartments = asyncHandler(async (req, res, next) => {
+  try {
+    const departments = await Department.find();
+    res.send(departments);
+  } catch (error) {
+    next(err);
+  }
+});
+
+// get single department by id
+export const getADepartment = asyncHandler(async (req, res, next) => {
+  try {
+    const department = await Department.findById(req.params.id);
+    if (!department) return res.status(404).send();
+
+    res.send(department);
   } catch (error) {
     next(error);
   }

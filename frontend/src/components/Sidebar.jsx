@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
-import { useNavigate, Outlet, Link } from 'react-router-dom';
-import {
-  AiOutlineDashboard,
-  AiOutlineShoppingCart,
-  AiOutlineUser,
-  AiOutlineBgColors,
-} from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 import { ImBlog } from 'react-icons/im';
-import { SiBrandfolder } from 'react-icons/si';
-import { BiCategoryAlt } from 'react-icons/bi';
-import { FaClipboardList, FaBloggerB } from 'react-icons/fa';
+import { BsPeople } from 'react-icons/bs';
+
+import { HiOutlineBuildingLibrary } from 'react-icons/hi2';
+
+import { BiHomeAlt2 } from 'react-icons/bi';
+import { FaClipboardList } from 'react-icons/fa';
 import { RiCouponLine } from 'react-icons/ri';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
-import { Layout, Menu, theme } from 'antd';
-const { Header, Sider, Content } = Layout;
+import { Layout, Menu } from 'antd';
+const { Sider } = Layout;
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -31,7 +28,7 @@ const Sidebar = () => {
         style={{ background: '#6a9691' }}
       >
         <h2 className="text-white fs-5 text-center py-3 mb-0">
-          <span className="sm-logo">L | A</span>
+          <span className="sm-logo">E | L</span>
           <span className="lg-logo">E-Learn</span>
         </h2>
       </div>
@@ -40,7 +37,7 @@ const Sidebar = () => {
         mode="inline"
         defaultSelectedKeys={['']}
         onClick={({ key }) => {
-          if (key == 'signout') {
+          if (key === 'signout') {
           } else {
             navigate(key);
           }
@@ -48,66 +45,25 @@ const Sidebar = () => {
         items={[
           {
             key: '',
-            icon: <AiOutlineDashboard className="fs-4" />,
-            label: 'Dashboard',
+            icon: <BiHomeAlt2 className="fs-4" />,
+            label: 'Home',
           },
           {
-            key: 'customers',
-            icon: <AiOutlineUser className="fs-4" />,
-            label: 'Customers',
+            key: 'department',
+            icon: <HiOutlineBuildingLibrary className="fs-4" />,
+            label: 'Departments',
           },
           {
-            key: 'Catalog',
-            icon: <AiOutlineShoppingCart className="fs-4" />,
-            label: 'Catalog',
-            children: [
-              {
-                key: 'product',
-                icon: <AiOutlineShoppingCart className="fs-4" />,
-                label: 'Add Product',
-              },
-              {
-                key: 'list-product',
-                icon: <AiOutlineShoppingCart className="fs-4" />,
-                label: 'Product List',
-              },
-              {
-                key: 'brand',
-                icon: <SiBrandfolder className="fs-4" />,
-                label: 'Add Brand',
-              },
-              {
-                key: 'list-brand',
-                icon: <SiBrandfolder className="fs-4" />,
-                label: 'Brand List ',
-              },
-              {
-                key: 'category',
-                icon: <BiCategoryAlt className="fs-4" />,
-                label: 'Add Category',
-              },
-              {
-                key: 'list-category',
-                icon: <BiCategoryAlt className="fs-4" />,
-                label: 'Category List',
-              },
-              {
-                key: 'color',
-                icon: <AiOutlineBgColors className="fs-4" />,
-                label: 'Add Color',
-              },
-              {
-                key: 'list-color',
-                icon: <AiOutlineBgColors className="fs-4" />,
-                label: 'Color List',
-              },
-            ],
+            key: 'students',
+            icon: <BsPeople className="fs-4" />,
+            label: 'Students',
           },
           {
-            key: 'orders',
+            key: 'tasks',
             icon: <FaClipboardList className="fs-4" />,
-            label: 'Orders',
+            label: 'Tasks',
           },
+
           {
             key: 'marketing',
             icon: <RiCouponLine className="fs-4" />,
@@ -124,38 +80,6 @@ const Sidebar = () => {
                 label: 'Coupon List',
               },
             ],
-          },
-          {
-            key: 'blogs',
-            icon: <FaBloggerB className="fs-4" />,
-            label: 'Blogs',
-            children: [
-              {
-                key: 'blog',
-                icon: <ImBlog className="fs-4" />,
-                label: 'Add Blog',
-              },
-              {
-                key: 'blog-list',
-                icon: <FaBloggerB className="fs-4" />,
-                label: 'Blog List',
-              },
-              {
-                key: 'blog-category',
-                icon: <ImBlog className="fs-4" />,
-                label: 'Add Blog Category',
-              },
-              {
-                key: 'blog-category-list',
-                icon: <FaBloggerB className="fs-4" />,
-                label: 'Blog Category List',
-              },
-            ],
-          },
-          {
-            key: 'enquiries',
-            icon: <FaClipboardList className="fs-4" />,
-            label: 'Enquiries',
           },
         ]}
       />

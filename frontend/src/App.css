@@ -1,5 +1,18 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  font-family: 'Barlow', sans-serif !important;
+}
+:root {
+  --color-black: #36393c;
+  --color-blue: #1890ff;
+  --color-skyblue: #65b7e5;
+  --color-yellow: #ffd333;
+  --color-green: #47ad24;
+  --color-red: #e52e2e;
+  --color-violet: #828599;
+  --color-lite-red: #ed464d;
+  --color-gray: #ced4da;
+  --color-white: #ffff;
 }
 
 .trigger {
@@ -11,25 +24,24 @@ body {
 }
 
 .trigger:hover {
-  color: #1890ff;
+  color: var(--color-blue);
 }
 
 .logo {
   height: 32px;
   margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+  background-color: #e7f1f6 !important;
 }
 
 .ant-layout {
   min-height: 100vh;
-
-  background-color: #f2f5f5 !important;
+  background-color: #fafafa !important;
 }
 .ant-menu-dark,
 .ant-menu-inline,
 .ant-layout-sider,
 .ant-menu {
-  background-color: #296862 !important;
+  background-color: #ffffff !important;
 }
 
 :where(.css-dev-only-do-not-override-diro6f).ant-menu-dark
@@ -38,8 +50,11 @@ body {
 }
 .sm-logo {
   display: none;
+  color: var(--color-black);
 }
-
+.lg-logo {
+  color: var(--color-black);
+}
 .ant-layout-sider-collapsed .sm-logo {
   display: block;
 }
@@ -59,6 +74,28 @@ main::-webkit-scrollbar {
 }
 .ant-menu-title-content {
   font-size: 16px;
+  font-weight: 500;
+  color: var(--color-black);
+}
+.ant-menu-submenu-title {
+  color: var(--color-black);
+}
+:where(.css-dev-only-do-not-override-ph9edi).ant-menu-dark
+  .ant-menu-submenu-title:hover:not(.ant-menu-item-selected):not(
+    .ant-menu-submenu-selected
+  ) {
+  color: var(--color-black);
+}
+.ant-menu-item-icon {
+  color: var(--color-black) !important;
+}
+
+:where(.css-dev-only-do-not-override-ph9edi).ant-menu-dark
+  .ant-menu-item-selected {
+  background-color: var(--color-skyblue) !important;
+}
+.ant-menu-item {
+  background-color: transparent !important;
 }
 .ant-layout-header h5 {
   line-height: 20px;
@@ -71,17 +108,6 @@ main::-webkit-scrollbar {
 .ant-layout-header div .badge {
   top: 16px;
   right: -6px;
-}
-
-:root {
-  --color-black: #212529;
-  --color-yellow: #ffd333;
-  --color-green: #47ad24;
-  --color-red: #e52e2e;
-  --color-violet: #828599;
-  --color-lite-red: #ed464d;
-  --color-gray: #ced4da;
-  --color-white: #ffff;
 }
 
 .green {
@@ -116,4 +142,89 @@ main::-webkit-scrollbar {
   font: 14px;
   font-family: Roboto !important;
   color: var(--color-violet);
+}
+
+/* login page */
+.login-page {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-page-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  min-height: 80vh;
+}
+
+.login-img-div {
+  width: 49%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.login-form-div {
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+}
+.login-Headline {
+  color: var(--color-black);
+  font-weight: 400;
+}
+.login-input {
+  padding: 18px;
+  border-radius: 10px;
+  border: transparent !important;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.login-btn {
+  border: none;
+  padding: 18px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 500;
+  font-size: 22px;
+  background-color: var(--color-skyblue);
+  cursor: pointer;
+}
+.login-btn:hover {
+  background-color: var(--color-blue);
+}
+
+/* login page */
+
+@media only screen and (max-width: 990px) {
+  .login-page-wrapper {
+    flex-direction: column;
+    height: auto;
+    margin: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+  .login-img-div {
+    width: 100%;
+    height: 240px;
+    border-radius: 0px;
+  }
+  .login-form-div {
+    width: 100%;
+    border-radius: 0px;
+  }
 }
