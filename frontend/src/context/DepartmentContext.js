@@ -14,7 +14,7 @@ const getTeacherData = () => {
 const initialState = {
   isLoading: false,
   isError: false,
-  deaprtments: [],
+  departments: [],
   teacherInfo: getTeacherData(),
 };
 
@@ -32,7 +32,7 @@ const DepartmentProvider = ({ children }) => {
       };
       // console.log(state.teacherInfo.token, 'heyyy');
       const res = await axios.get(url, config);
-      const departments = await res.data;
+      const departments = await res.data.departments;
       console.log(departments, 'departments');
       dispatch({ type: 'GET_DEPARTMENTS_SUCCESS', payload: departments });
     } catch (error) {

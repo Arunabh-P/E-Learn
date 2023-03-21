@@ -61,7 +61,7 @@ export const addStudentToDeparttment = asyncHandler(async (req, res, next) => {
 // get all department
 export const getAllDepartments = asyncHandler(async (req, res, next) => {
   try {
-    const departments = await Department.find();
+    const departments = await Department.find().populate('head', 'name');
     // res.send(departments);
     res.status(200).json({
       success: true,
