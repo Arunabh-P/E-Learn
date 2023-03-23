@@ -6,6 +6,8 @@ body {
   --color-black: #36393c;
   --color-blue: #1890ff;
   --color-skyblue: #65b7e5;
+  --color-lite-skyblue: #e7f1f6;
+  /* #ffdd4d */
   --color-yellow: #ffd333;
   --color-green: #47ad24;
   --color-red: #e52e2e;
@@ -207,6 +209,22 @@ main::-webkit-scrollbar {
   background-color: var(--color-blue);
 }
 
+.department-div {
+  display: flex;
+  flex-wrap: wrap;
+}
+.department-card {
+  padding: 20px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: var(--color-white);
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.department-card:hover {
+  background-color: var(--color-lite-skyblue);
+  cursor: pointer;
+}
 /* login page */
 
 @media only screen and (max-width: 990px) {

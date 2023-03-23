@@ -1,50 +1,55 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useReducer,
+} from 'react';
 import axios from 'axios';
 import reducer from '../reducer/departmentReducer';
+import { useTeacherContext } from './teacherContext';
 
 const DepartmentContext = createContext();
 
-const API = 'http://localhost:5000/api/department/allDepartments';
-const getTeacherData = () => {
-  let teacherData = localStorage.getItem('teacherInfo');
-  const parseData = JSON.parse(teacherData);
-  if (!parseData) return null;
-  return parseData;
-};
 const initialState = {
-  isLoading: false,
+  isLoading: true,
   isError: false,
-  departments: [],
-  teacherInfo: getTeacherData(),
+  departments: null,
 };
 
 const DepartmentProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const getDepartments = async (url) => {
+  const teacherDetails = useTeacherContext();
+  let token = teacherDetails?.state?.teacherInfo?.token;
+  console.log(token, 'come');
+  const getDepartments = useCallback(async () => {
     dispatch({ type: 'GET_DEPARTMENTS_LOADING' });
     try {
-      let teacher = state.teacherInfo.token;
+      let teacher = token;
+      console.log(teacher, 'heloooooo here is teacher can u see');
       const config = {
         headers: {
           Authorization: `Bearer ${teacher}`,
         },
       };
-      // console.log(state.teacherInfo.token, 'heyyy');
-      const res = await axios.get(url, config);
-      const departments = await res.data.departments;
-      console.log(departments, 'departments');
-      dispatch({ type: 'GET_DEPARTMENTS_SUCCESS', payload: departments });
+      const res = await axios.get(
+        'http://localhost:5000/api/department/allDepartments',
+        config
+      );
+      const departmentData = res.data.departments;
+      console.log(departmentData, 'departments');
+      dispatch({ type: 'GET_DEPARTMENTS_SUCCESS', payload: departmentData });
     } catch (error) {
       dispatch({
         type: 'GET_DEPARTMENT_ERROR',
-        payload: error.res.data.message,
+        payload: error.res ? error.res.data.message : error.message,
+        // payload: error.res.data.message,
       });
     }
-  };
+  }, [token]);
   useEffect(() => {
-    getDepartments(API);
-  }, []);
+    getDepartments();
+  }, [getDepartments]);
 
   return (
     <DepartmentContext.Provider value={{ ...state, getDepartments }}>

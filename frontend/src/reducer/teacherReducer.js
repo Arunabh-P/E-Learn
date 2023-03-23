@@ -18,12 +18,6 @@ const teacherReducer = (state, action) => {
         teacherInfo: null,
         isError: action.payload,
       };
-    case 'LOGOUT':
-      return {
-        ...state,
-        teacherInfo: null,
-        isError: false,
-      };
 
     default:
       return state;

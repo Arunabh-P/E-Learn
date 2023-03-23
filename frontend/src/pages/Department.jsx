@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDepartmentContext } from '../context/DepartmentContext';
 
 const Department = () => {
-  const { departments } = useDepartmentContext();
-  console.log(departments, 'heyhyehyeeh');
+  const { isLoading, departments } = useDepartmentContext();
+  console.log(departments, 'this is another');
+  useEffect(() => {}, []);
   return (
-    <div>
-      {departments.map((curElem, id) => (
-        <>
-          <h1 key={curElem._id}> {curElem.name} </h1>
-          <h1> {curElem.head.name} </h1>
-        </>
-      ))}
-    </div>
+    <>
+      {isLoading ? (
+        <p>Loading</p>
+      ) : (
+        <div className="department-div">
+          {departments?.map((curElem) => (
+            <div className="department-card" key={curElem?._id}>
+              <h4>Department : {curElem?.name} </h4>
+              <p> Department Head : {curElem?.head?.name} </p>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 

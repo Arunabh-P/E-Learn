@@ -6,9 +6,9 @@ import { AppProvider } from './context/teacherContext';
 import { DepartmentProvider } from './context/DepartmentContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <DepartmentProvider>
-    <AppProvider>
+  <AppProvider>
+    <DepartmentProvider>
       <App />
-    </AppProvider>
-  </DepartmentProvider>
+    </DepartmentProvider>
+  </AppProvider>
 );
