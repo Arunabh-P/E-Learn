@@ -1,20 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, theme } from 'antd';
 import { IoIosNotifications } from 'react-icons/io';
-const { Header } = Layout;
 const NavBar = () => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
   return (
-    <Header
-      className="d-flex justify-content-between ps-1 pe-5"
-      style={{
-        padding: 0,
-        background: colorBgContainer,
-      }}
-    >
+    <div className="d-flex justify-content-between ps-1 pe-5 header-wrapper">
       <div className="d-flex justify-content-end gap-4 align-items-center">
         <div className="position-relative">
           <IoIosNotifications className="fs-4" />
@@ -64,7 +53,7 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-    </Header>
+    </div>
   );
 };
 

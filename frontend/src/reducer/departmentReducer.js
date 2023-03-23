@@ -17,6 +17,23 @@ const departmentReducer = (state, action) => {
         isLoading: false,
         isError: true,
       };
+    case 'GET_SINGLE_DEPARTMENT_LOADING':
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case 'GET_SINGLE_DEPARTMENT_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+        single_department: action.payload,
+      };
+    case 'GET_SINGLE_DEPARTMENT_ERROR':
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
 
     default:
       return state;

@@ -10,18 +10,24 @@ import reducer from '../reducer/departmentReducer';
 import { useTeacherContext } from './teacherContext';
 
 const DepartmentContext = createContext();
-
+const getTeacherData = () => {
+  let teacherData = localStorage.getItem('teacherInfo');
+  const parseData = JSON.parse(teacherData);
+  if (!parseData) return null;
+  return parseData;
+};
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   isError: false,
-  departments: null,
+  departments: [],
+  single_department: [],
+  teacherInfo: getTeacherData(),
 };
 
 const DepartmentProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const teacherDetails = useTeacherContext();
   let token = teacherDetails?.state?.teacherInfo?.token;
-  console.log(token, 'come');
   const getDepartments = useCallback(async () => {
     dispatch({ type: 'GET_DEPARTMENTS_LOADING' });
     try {
@@ -43,16 +49,48 @@ const DepartmentProvider = ({ children }) => {
       dispatch({
         type: 'GET_DEPARTMENT_ERROR',
         payload: error.res ? error.res.data.message : error.message,
-        // payload: error.res.data.message,
       });
     }
   }, [token]);
+  const getSingleDepartment = useCallback(
+    async (id) => {
+      dispatch({ type: 'GET_SINGLE_DEPARTMENT_LOADING' });
+      try {
+        let teacher = token;
+        const config = {
+          headers: {
+            Authorization: `Bearer ${teacher}`,
+          },
+        };
+        const res = await axios.get(
+          `http://localhost:5000/api/department/${id}`,
+          config
+        );
+        const singleDepartment = res.data;
+        console.log(singleDepartment, 'single department');
+        dispatch({
+          type: 'GET_SINGLE_DEPARTMENT_SUCCESS',
+          payload: singleDepartment,
+        });
+      } catch (error) {
+        dispatch({
+          type: 'GET_SINGLE_DEPARTMENT_ERROR',
+          payload: error.res ? error.res.data.message : error.message,
+        });
+      }
+    },
+    [token]
+  );
+
   useEffect(() => {
     getDepartments();
-  }, [getDepartments]);
+    getSingleDepartment();
+  }, [getDepartments, getSingleDepartment]);
 
   return (
-    <DepartmentContext.Provider value={{ ...state, getDepartments }}>
+    <DepartmentContext.Provider
+      value={{ ...state, getDepartments, getSingleDepartment }}
+    >
       {children}
     </DepartmentContext.Provider>
   );

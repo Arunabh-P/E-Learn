@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import axios from 'axios';
 import reducer from '../reducer/teacherReducer';
 
@@ -12,6 +12,7 @@ const getTeacherData = () => {
 const initialState = {
   isLoading: false,
   isError: false,
+  departments: [],
   teacherInfo: getTeacherData(),
 };
 const AppProvider = ({ children }) => {

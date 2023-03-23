@@ -1,13 +1,8 @@
-body {
-  margin: 0;
-  font-family: 'Barlow', sans-serif !important;
-}
 :root {
   --color-black: #36393c;
   --color-blue: #1890ff;
   --color-skyblue: #65b7e5;
   --color-lite-skyblue: #e7f1f6;
-  /* #ffdd4d */
   --color-yellow: #ffd333;
   --color-green: #47ad24;
   --color-red: #e52e2e;
@@ -15,6 +10,12 @@ body {
   --color-lite-red: #ed464d;
   --color-gray: #ced4da;
   --color-white: #ffff;
+  --color-lite-gray: #fafafa;
+}
+body {
+  margin: 0;
+  font-family: 'Barlow', sans-serif !important;
+  background-color: var(--color-lite-gray) !important;
 }
 
 .trigger {
@@ -245,4 +246,100 @@ main::-webkit-scrollbar {
     width: 100%;
     border-radius: 0px;
   }
+}
+
+/* sidebar  */
+#sidebar-toggle {
+  background-color: transparent;
+  border: none;
+}
+.toggle-icon {
+  color: var(--color-black);
+}
+.toggle-icon:hover {
+  color: var(--color-yellow);
+}
+
+.sidebar-brand {
+  background-color: var(--color-lite-skyblue);
+  margin: 0px 10px;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+.full-title {
+  font-weight: 500;
+  font-size: 20px;
+}
+.short-title {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.sidebar-submenu-link {
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.sidebar-submenu-link:hover {
+  background-color: var(--color-yellow) !important;
+}
+.sidebar-txt {
+  color: var(--color-black);
+  padding-left: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.sidebar {
+  width: 200px;
+  height: 100%;
+  position: fixed;
+  background-color: var(--color-white);
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.sidebar-content {
+  padding: 10px;
+}
+
+.sidebar-submenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-submenu-item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.sidebar-reduced {
+  width: 90px;
+}
+/* sidebar  */
+
+/* header  */
+.header-wrapper {
+  background-color: var(--color-white);
+  padding: 15px;
+  margin: 10px 0px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+/* header  */
+
+.page-wrapper {
+  padding-left: 6rem;
 }
