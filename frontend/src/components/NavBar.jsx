@@ -1,7 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import * as api from '../api/teacher';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoIosNotifications } from 'react-icons/io';
+import { AiOutlinePoweroff } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
+import { TEACHER_SIGNOUT } from '../constants/actionTypes';
+
 const NavBar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    await api.logoutTeacher();
+    dispatch({
+      type: TEACHER_SIGNOUT,
+    });
+    navigate('/teacher');
+  };
   return (
     <div className="d-flex justify-content-between ps-1 pe-5 header-wrapper">
       <div className="d-flex justify-content-end gap-4 align-items-center">
@@ -52,6 +66,12 @@ const NavBar = () => {
             </li>
           </div>
         </div>
+      </div>
+      <div className="logout-div">
+        <AiOutlinePoweroff
+          className="logout-icon fs-4"
+          onClick={handleLogout}
+        />
       </div>
     </div>
   );

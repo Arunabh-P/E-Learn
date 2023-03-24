@@ -3,33 +3,21 @@ import asyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
 
 export const isTeacher = asyncHandler(async (req, res, next) => {
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
-  ) {
-    let teacherToken = req.headers.authorization.split(' ')[1];
+  const token = req.signedCookies.teacherToken;
 
-    try {
-      // const { teacherToken } = req.cookies;
-      // console.log(teacherToken);
-      if (!teacherToken) {
-        return res.status(401).json({
-          message: 'Please login first',
-        });
-      }
+  if (token) {
+    let decodedData = jwt.verify(token, process.env.JWT_SECRET);
 
-      const decoded = jwt.verify(teacherToken, process.env.JWT_SECRET);
-
-      req.teacher = await Teacher.findById(decoded.teacherId);
-
+    if (decodedData) {
+      req.body.decodedId = decodedData?.id;
+      req.body.token = token;
       next();
-    } catch (error) {
-      res.status(500).json({
-        message: error.message,
-      });
     }
+  } else {
+    res.status(401).json({ message: 'Not authorized' });
   }
 });
+
 export const isAdmin = asyncHandler(async (req, res, next) => {
   try {
     const { teacherToken } = req.cookies;

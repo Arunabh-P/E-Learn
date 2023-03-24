@@ -1,18 +1,21 @@
 import express from 'express';
-import { isAdmin } from '../middlewares/authMiddlewares.js';
+const router = express.Router();
+
+import { isAdmin, isTeacher } from '../middlewares/authMiddlewares.js';
 import {
   createTeacher,
   teacherLogin,
   logoutTeacher,
   getAllTeachers,
   getATeacher,
+  verifyTeacher,
 } from '../controller/teacherController.js';
 
-const router = express.Router();
+router.get('/verify', isTeacher, verifyTeacher);
+router.post('/login', teacherLogin);
+router.get('/logout', isTeacher, logoutTeacher);
 
 router.post('/register', isAdmin, createTeacher);
-router.post('/login', teacherLogin);
-router.post('/logout', logoutTeacher);
 router.get('/allTeachers', getAllTeachers);
 router.get('/:id', getATeacher);
 

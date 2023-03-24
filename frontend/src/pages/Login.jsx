@@ -2,27 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import loginImg from '../images/banners/teacher.jpg';
 import { useNavigate } from 'react-router-dom';
-import { useTeacherContext } from '../context/teacherContext';
+import { useDispatch } from 'react-redux';
+import { useSnackbar, VariantType } from 'notistack';
+import { signIn } from '../actions/teacherActions';
 
 const Login = () => {
-  const { state, login } = useTeacherContext();
-  const { teacherInfo, isError } = state;
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+  const [response, setResponse] = useState({ status: false, message: '' });
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: '',
+  });
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  let navigate = useNavigate();
-
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    login(email, password);
+  const handleLogin = () => {
+    dispatch(signIn(loginData, setResponse));
   };
 
   useEffect(() => {
-    if (teacherInfo) {
-      navigate('/teacher');
+    if (response.status) {
+      enqueueSnackbar(response.message, { variant: 'error' });
     }
-  }, [teacherInfo, navigate]);
+  }, [enqueueSnackbar, response]);
 
   return (
     <>
@@ -33,29 +34,39 @@ const Login = () => {
             style={{ backgroundImage: `url(${loginImg})` }}
           ></div>
           <div className="login-form-div">
-            <form onSubmit={submitHandler} className="login-form">
+            <div className="login-form">
               <h1 className="login-Headline text-center mb-3">Sign in</h1>
               <input
                 className="mb-3 login-input"
                 type="email"
                 name="email"
                 placeholder="Enter Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={loginData.email}
+                onChange={(e) =>
+                  setLoginData((prev) => ({
+                    ...prev,
+                    email: e.target.value,
+                  }))
+                }
               />
               <input
                 type="password"
                 name="password"
                 className="mb-3 login-input"
                 placeholder="Enter Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={loginData.password}
+                onChange={(e) =>
+                  setLoginData((prev) => ({
+                    ...prev,
+                    password: e.target.value,
+                  }))
+                }
               />
-              {isError && <div>{isError}</div>}
-              <button type="submit" className="login-btn">
+              {/* {isError && <div>{isError}</div>} */}
+              <button onClick={handleLogin} className="login-btn">
                 Login
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </Container>

@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AppProvider } from './context/teacherContext';
-import { DepartmentProvider } from './context/DepartmentContext';
+import { SnackbarProvider } from 'notistack';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import store from './store';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <AppProvider>
-    <DepartmentProvider>
-      <App />
-    </DepartmentProvider>
-  </AppProvider>
+  <React.StrictMode>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <SnackbarProvider maxSnack={3}>
+          <App />
+        </SnackbarProvider>
+      </Provider>
+    </ErrorBoundary>
+  </React.StrictMode>
 );

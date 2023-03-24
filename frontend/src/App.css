@@ -338,6 +338,17 @@ main::-webkit-scrollbar {
   border-radius: 15px;
   margin-bottom: 20px;
 }
+.logout-div {
+}
+.logout-icon {
+  color: var(--color-red);
+  cursor: pointer;
+}
+.logout-icon:hover {
+  color: var(--color-black);
+  cursor: pointer;
+}
+
 /* header  */
 
 .page-wrapper {

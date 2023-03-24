@@ -32,7 +32,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 // routes
 app.use('/api/students', studentRoute);
-app.use('/api/teachers', teacherRoute);
+app.use('/api/teacher', teacherRoute);
 app.use('/api/department', departmentRoute);
 
 const PORT = process.env.PORT;

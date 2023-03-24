@@ -2,6 +2,7 @@ import Teacher from '../model/teacherModel.js';
 import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import ObjectId from 'mongodb';
 // create teacher
 export const createTeacher = asyncHandler(async (req, res, next) => {
   try {
@@ -23,59 +24,56 @@ export const createTeacher = asyncHandler(async (req, res, next) => {
   }
 });
 
-// teacher login
-export const teacherLogin = asyncHandler(async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.status(400).json({ error: 'Missing email or password' });
-    }
-    const teacher = await Teacher.findOne({ email });
+// @desc  Signin teacher
+// @rout  POST /api/teacher/login
+export const teacherLogin = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const teacher = await Teacher.findOne({ email });
 
-    if (!teacher) return res.status(404).send({ message: 'teacher not found' });
+  if (!teacher)
+    return res.status(404).json({ message: 'You are not an Teacher!' });
 
-    const isMatch = await bcrypt.compare(password, teacher.password);
+  const isPassValid = await bcrypt.compare(password, teacher.password);
 
-    if (!isMatch)
-      return res.status(401).send({ message: 'Authentifiaction faild' });
+  if (!isPassValid)
+    return res.status(400).json({ message: 'Invalid Credentials' });
 
-    const token = jwt.sign(
-      { email: teacher.email, teacherId: teacher._id },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: '1h',
-      }
-    );
+  const token = jwt.sign(
+    {
+      email: teacher.email,
+      id: teacher._id,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '1h' }
+  );
+  res.cookie('teacherToken', token, {
+    httpOnly: true,
+    signed: true,
+    maxAge: 900000,
+  });
+  res.status(200).json({ email: teacher.email, name: teacher.name });
+});
 
-    res
-      .cookie('teacherToken', token, {
-        httpOnly: true,
-        signed: true,
-        maxAge: 900000,
-      })
-      .json({
-        success: true,
-        teacher,
-        token,
-      });
-  } catch (error) {
-    next(error);
+// @desc  Verify teacher
+// @rout  GET /api/teacher/verify
+
+export const verifyTeacher = asyncHandler(async (req, res) => {
+  const tokenId = req.body.decodeId;
+
+  const teacher = await Teacher.findOne({ _id: ObjectId(tokenId) });
+
+  if (teacher) {
+    teacher.token = req.body.token;
+    res.status(200).json({ email: teacher.email, name: teacher.name });
+  } else {
+    res.status(404).json({ status: false });
   }
 });
 
-// // logout
-export const logoutTeacher = asyncHandler(async (req, res, next) => {
-  try {
-    res
-      .clearCookie('teacherToken', {
-        sameSite: 'none',
-        secure: true,
-      })
-      .status(200)
-      .send({ message: 'Logout successfully' });
-  } catch (error) {
-    next(error);
-  }
+// @desc  Logout teacher
+// @rout  GET /api/teacher/logout
+export const logoutTeacher = asyncHandler(async (req, res) => {
+  res.status(200).clearCookie('teacherToken').send({});
 });
 
 // // get all teachers

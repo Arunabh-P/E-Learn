@@ -16,7 +16,7 @@ const teacherReducer = (state, action) => {
       return {
         ...state,
         teacherInfo: null,
-        isError: action.payload,
+        isError: true,
       };
 
     default:
