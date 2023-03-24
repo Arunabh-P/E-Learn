@@ -18,11 +18,17 @@ a {
 }
 .sub-heading {
   color: var(--color-black);
-  font-weight: 400;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  line-height: 38px;
 }
 .p-text {
   color: var(--color-black);
-  font-weight: 300;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  line-height: 28px;
 }
 .main-page {
   background-color: var(--color-lite-gray) !important;
@@ -247,6 +253,30 @@ main::-webkit-scrollbar {
   cursor: pointer;
 }
 /* department */
+
+/* single department page */
+.single-department-div {
+  padding: 20px;
+  margin-right: 10px;
+  background-color: var(--color-white);
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.dep-students-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.dep-student-div {
+  background-color: var(--color-lite-skyblue);
+  padding: 5px 15px;
+  border-radius: 5px;
+  margin: 10px 10px 10px 0px;
+  cursor: pointer;
+}
+.dep-student-div:hover {
+  background-color: var(--color-skyblue);
+}
+/* single department page*/
 
 @media only screen and (max-width: 990px) {
   .login-page-wrapper {

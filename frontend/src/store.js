@@ -2,13 +2,16 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
-import { getDepartmentsReducer } from './reducers/departmentReducer';
+import {
+  getDepartmentsReducer,
+  getOneDepartmentReducer,
+} from './reducers/departmentReducer';
 
-import { teacherDetails, showTeacherProgress } from './reducers/teacherReducer';
+import { teacherDetails } from './reducers/teacherReducer';
 const reducers = combineReducers({
   teacherDetails,
-  showTeacherProgress,
   getDepartmentsReducer,
+  getOneDepartmentReducer,
 });
 
 const store = createStore(

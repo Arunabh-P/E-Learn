@@ -57,22 +57,3 @@ export const addStudentToDeparttment = asyncHandler(async (req, res, next) => {
     next(error);
   }
 });
-
-// get single department by id
-export const getADepartment = asyncHandler(async (req, res, next) => {
-  try {
-    if (!req.params.id || req.params.id === '') {
-      return res.status(400).send('Department ID is missing or invalid');
-    }
-    const department = await Department.findById(req.params.id).populate(
-      'head students'
-    );
-    if (!department) {
-      return res.status(404).send('Department not found');
-    }
-
-    res.send(department);
-  } catch (error) {
-    next(error);
-  }
-});

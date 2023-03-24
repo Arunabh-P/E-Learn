@@ -10,9 +10,9 @@ const API = axios.create({
 
 // Teacher endpoints
 export const loginTeacher = (data) => API.post(`/login`, data);
-export const verifyTeacher = (data) => API.get(`/verify`);
 export const logoutTeacher = () => API.get(`/logout`);
 export const fetchDepartments = () => API.get(`/departments`);
+export const fetchOneDepartment = (id) => API.get(`/departments/${id}`);
 
 API.interceptors.response.use(
   (response) => {

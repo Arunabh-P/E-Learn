@@ -1,29 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import loginImg from '../images/banners/teacher.jpg';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useSnackbar, VariantType } from 'notistack';
 import { signIn } from '../actions/teacherActions';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { enqueueSnackbar } = useSnackbar();
-  const [response, setResponse] = useState({ status: false, message: '' });
   const [loginData, setLoginData] = useState({
     email: '',
     password: '',
   });
 
   const handleLogin = () => {
-    dispatch(signIn(loginData, setResponse));
+    dispatch(signIn(loginData));
   };
-
-  useEffect(() => {
-    if (response.status) {
-      enqueueSnackbar(response.message, { variant: 'error' });
-    }
-  }, [enqueueSnackbar, response]);
 
   return (
     <>

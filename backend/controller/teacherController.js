@@ -3,7 +3,6 @@ import Departments from '../model/departmentModel.js';
 import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import ObjectId from 'mongodb';
 // create teacher
 export const createTeacher = asyncHandler(async (req, res, next) => {
   try {
@@ -55,22 +54,6 @@ export const teacherLogin = asyncHandler(async (req, res) => {
   res.status(200).json({ email: teacher.email, name: teacher.name });
 });
 
-// @desc  Verify teacher
-// @rout  GET /api/teacher/verify
-
-export const verifyTeacher = asyncHandler(async (req, res) => {
-  const tokenId = req.body.decodeId;
-
-  const teacher = await Teacher.findOne({ _id: ObjectId(tokenId) });
-
-  if (teacher) {
-    teacher.token = req.body.token;
-    res.status(200).json({ email: teacher.email, name: teacher.name });
-  } else {
-    res.status(404).json({ status: false });
-  }
-});
-
 // @desc  Logout teacher
 // @rout  GET /api/teacher/logout
 export const logoutTeacher = asyncHandler(async (req, res) => {
@@ -83,6 +66,26 @@ export const getDepartments = asyncHandler(async (req, res) => {
   let response = await Departments.find().populate('head', 'name');
   if (response) {
     res.status(200).json({ status: true, departments: response });
+  }
+});
+
+// @desc Get department by id
+// @rout    GET /api/teacher/departments/:id
+export const getOneDepartment = asyncHandler(async (req, res, next) => {
+  try {
+    if (!req.params.id || req.params.id === '') {
+      return res.status(400).send('Department ID is missing or invalid');
+    }
+    const department = await Departments.findById(req.params.id).populate(
+      'head students'
+    );
+    if (!department) {
+      return res.status(404).send('Department not found');
+    }
+
+    res.send(department);
+  } catch (error) {
+    next(error);
   }
 });
 

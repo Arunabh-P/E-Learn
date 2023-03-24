@@ -2,13 +2,11 @@ import express from 'express';
 import {
   createDepartment,
   addStudentToDeparttment,
-  getADepartment,
 } from '../controller/departmentController.js';
 import { isTeacher } from '../middlewares/authMiddlewares.js';
 const router = express.Router();
 
 router.post('/addDepartment', isTeacher, createDepartment);
 router.post('/:id', isTeacher, addStudentToDeparttment);
-router.get('/:id', isTeacher, getADepartment);
 
 export default router;

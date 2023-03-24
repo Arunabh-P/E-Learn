@@ -1,8 +1,4 @@
-import {
-  TEACHER_SIGNIN,
-  TEACHER_VERIFIED,
-  TEACHER_SIGNOUT,
-} from '../constants/actionTypes';
+import { TEACHER_SIGNIN, TEACHER_SIGNOUT } from '../constants/actionTypes';
 import { encodeData, decodeData } from '../validations/encryptInfo';
 
 let authData = { teacher: null, loading: false };
@@ -32,14 +28,6 @@ export const teacherDetails = (teacher = authData, action) => {
         loading: false,
       };
 
-    case TEACHER_VERIFIED:
-      localStorage.setItem('teacherInfo', encodeData(action.payload));
-      return {
-        ...teacher,
-        teacher: action.payload,
-        loading: false,
-      };
-
     case TEACHER_SIGNOUT:
       localStorage.removeItem('teacherInfo');
       return {
@@ -49,16 +37,5 @@ export const teacherDetails = (teacher = authData, action) => {
 
     default:
       return teacher;
-  }
-};
-
-export const showTeacherProgress = (state = false, action) => {
-  switch (action.type) {
-    case 'SHOW_TEACHER_PROGRESS':
-      return true;
-    case 'HIDE_TEACHER_PROGRESS':
-      return false;
-    default:
-      return state;
   }
 };
