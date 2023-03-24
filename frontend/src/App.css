@@ -12,10 +12,28 @@
   --color-white: #ffff;
   --color-lite-gray: #fafafa;
 }
+Link,
+a {
+  text-decoration: none !important;
+}
+.sub-heading {
+  color: var(--color-black);
+  font-weight: 400;
+}
+.p-text {
+  color: var(--color-black);
+  font-weight: 300;
+}
+.main-page {
+  background-color: var(--color-lite-gray) !important;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  top: 0;
+}
 body {
   margin: 0;
   font-family: 'Barlow', sans-serif !important;
-  background-color: var(--color-lite-gray) !important;
 }
 
 .trigger {
@@ -209,7 +227,9 @@ main::-webkit-scrollbar {
 .login-btn:hover {
   background-color: var(--color-blue);
 }
+/* login page */
 
+/* department */
 .department-div {
   display: flex;
   flex-wrap: wrap;
@@ -226,7 +246,7 @@ main::-webkit-scrollbar {
   background-color: var(--color-lite-skyblue);
   cursor: pointer;
 }
-/* login page */
+/* department */
 
 @media only screen and (max-width: 990px) {
   .login-page-wrapper {
@@ -300,6 +320,7 @@ main::-webkit-scrollbar {
   top: 0;
   left: 0;
   overflow-y: auto;
+  z-index: 1;
 }
 
 .sidebar-header {
@@ -334,9 +355,9 @@ main::-webkit-scrollbar {
 .header-wrapper {
   background-color: var(--color-white);
   padding: 15px;
-  margin: 10px 0px;
   border-radius: 15px;
-  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
 }
 .logout-div {
 }

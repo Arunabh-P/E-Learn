@@ -12,6 +12,7 @@ const API = axios.create({
 export const loginTeacher = (data) => API.post(`/login`, data);
 export const verifyTeacher = (data) => API.get(`/verify`);
 export const logoutTeacher = () => API.get(`/logout`);
+export const fetchDepartments = () => API.get(`/departments`);
 
 API.interceptors.response.use(
   (response) => {
@@ -24,6 +25,7 @@ API.interceptors.response.use(
           type: TEACHER_SIGNOUT,
         });
       }
+      rej(error);
     });
   }
 );

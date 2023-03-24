@@ -54,7 +54,7 @@ const SideNav = () => {
           </Link>
 
           <Link
-            to="/department"
+            to="/teacher/department"
             onClick={() => handleClick('button2')}
             className="sidebar-submenu-link"
             style={{
@@ -73,7 +73,7 @@ const SideNav = () => {
           </Link>
 
           <Link
-            to="/students"
+            to="/teacher/students"
             onClick={() => handleClick('button3')}
             className="sidebar-submenu-link"
             style={{
@@ -89,7 +89,7 @@ const SideNav = () => {
           </Link>
 
           <Link
-            to="/tasks"
+            to="/teacher/tasks"
             onClick={() => handleClick('button4')}
             className="sidebar-submenu-link"
             style={{

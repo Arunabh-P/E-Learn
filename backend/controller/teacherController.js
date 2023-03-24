@@ -1,4 +1,5 @@
 import Teacher from '../model/teacherModel.js';
+import Departments from '../model/departmentModel.js';
 import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -74,6 +75,15 @@ export const verifyTeacher = asyncHandler(async (req, res) => {
 // @rout  GET /api/teacher/logout
 export const logoutTeacher = asyncHandler(async (req, res) => {
   res.status(200).clearCookie('teacherToken').send({});
+});
+
+// @desc    Get department
+// @rout    GET /api/teacher/department
+export const getDepartments = asyncHandler(async (req, res) => {
+  let response = await Departments.find().populate('head', 'name');
+  if (response) {
+    res.status(200).json({ status: true, departments: response });
+  }
 });
 
 // // get all teachers

@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import SingleDepartment from './pages/SingleDepartment';
 import SideNav from './components/SideNav';
 import { useSelector } from 'react-redux';
+import NavBar from './components/NavBar';
 function App() {
   const teacher = useSelector((state) => state.teacherDetails.teacher);
   const { showTopProgress } = useSelector((state) => state);
@@ -16,6 +17,8 @@ function App() {
     <>
       <Router>
         {teacher ? <SideNav /> : ''}
+        {teacher ? <NavBar /> : ''}
+
         <Routes>
           <Route path="/teacher" element={teacher ? <Home /> : <Login />} />
           <Route

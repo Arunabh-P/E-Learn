@@ -3,7 +3,7 @@ import * as api from '../api/teacher';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoIosNotifications } from 'react-icons/io';
 import { AiOutlinePoweroff } from 'react-icons/ai';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { TEACHER_SIGNOUT } from '../constants/actionTypes';
 
 const NavBar = () => {
@@ -16,16 +16,11 @@ const NavBar = () => {
     });
     navigate('/teacher');
   };
+  const { name, email } = useSelector((state) => state.teacherDetails.teacher);
+  console.log(name);
   return (
-    <div className="d-flex justify-content-between ps-1 pe-5 header-wrapper">
-      <div className="d-flex justify-content-end gap-4 align-items-center">
-        <div className="position-relative">
-          <IoIosNotifications className="fs-4" />
-          <span className="badge bg-warning rounded-circle p-1 position-absolute">
-            3
-          </span>
-        </div>
-
+    <div className="d-flex justify-content-end align-items-center ps-1 pe-5 header-wrapper">
+      <div className="d-flex justify-content-end   align-items-center">
         <div className="d-flex gap-3 align-items-center dropdown">
           <div>
             <img
@@ -42,8 +37,8 @@ const NavBar = () => {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <h5 className="mb-0">Arunabh</h5>
-            <p className="mb-0">arunabh1995@gmail.com</p>
+            <h5 className="mb-0">{name}</h5>
+            <p className="mb-0">{email}</p>
           </div>
           <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <li>
@@ -59,19 +54,13 @@ const NavBar = () => {
               <Link
                 className="dropdown-item py-1 mb-1"
                 style={{ height: 'auto', lineHeight: '20px' }}
-                to="/"
+                onClick={handleLogout}
               >
                 Signout
               </Link>
             </li>
           </div>
         </div>
-      </div>
-      <div className="logout-div">
-        <AiOutlinePoweroff
-          className="logout-icon fs-4"
-          onClick={handleLogout}
-        />
       </div>
     </div>
   );

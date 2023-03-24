@@ -9,11 +9,13 @@ import {
   getAllTeachers,
   getATeacher,
   verifyTeacher,
+  getDepartments,
 } from '../controller/teacherController.js';
 
 router.get('/verify', isTeacher, verifyTeacher);
 router.post('/login', teacherLogin);
 router.get('/logout', isTeacher, logoutTeacher);
+router.get('/departments', getDepartments);
 
 router.post('/register', isAdmin, createTeacher);
 router.get('/allTeachers', getAllTeachers);
