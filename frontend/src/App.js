@@ -9,6 +9,7 @@ import SingleDepartment from './pages/SingleDepartment';
 import SideNav from './components/SideNav';
 import { useSelector } from 'react-redux';
 import NavBar from './components/NavBar';
+import StudentInfo from './pages/StudentInfo';
 function App() {
   const teacher = useSelector((state) => state.teacherDetails.teacher);
   return (
@@ -32,6 +33,10 @@ function App() {
             <Route
               path="department/:id"
               element={teacher ? <SingleDepartment /> : <Login />}
+            />
+            <Route
+              path="students/:id"
+              element={teacher ? <StudentInfo /> : <Login />}
             />
           </Route>
         </Routes>

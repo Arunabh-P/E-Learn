@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
+import { IoMdAdd } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getOneDepartmentAction } from '../actions/departmentAction';
-import { verifyTeacher } from '../api/teacher';
 import Loading from '../components/Loading';
 
 const SingleDepartment = () => {
@@ -13,7 +13,6 @@ const SingleDepartment = () => {
   const { loading, department } = useSelector(
     (state) => state.getOneDepartmentReducer
   );
-  console.log(department);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,11 +41,16 @@ const SingleDepartment = () => {
                 <h5 className="sub-heading">Students</h5>
                 <div className="dep-students-wrapper">
                   {department?.students?.map((curElem) => (
-                    <div key={curElem?._id} className="dep-student-div">
-                      <p className="p-text">{curElem.name}</p>
-                    </div>
+                    <Link to={`/teacher/students/${curElem?._id}`}>
+                      <div key={curElem?._id} className="dep-student-div">
+                        <p className="p-text">{curElem.name}</p>
+                      </div>
+                    </Link>
                   ))}
                 </div>
+                <button className="button-1">
+                  <IoMdAdd className="add-icon fs-3" />
+                </button>
               </div>
             </div>
           )}

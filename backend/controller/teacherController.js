@@ -53,7 +53,10 @@ export const teacherLogin = asyncHandler(async (req, res) => {
     signed: true,
     maxAge: 900000,
   });
-  res.status(200).json({ email: teacher.email, name: teacher.name });
+  res
+    .status(200)
+    .json({ email: teacher.email, name: teacher.name, role: teacher.role });
+  console.log(teacher.role);
 });
 
 // @desc  Logout teacher

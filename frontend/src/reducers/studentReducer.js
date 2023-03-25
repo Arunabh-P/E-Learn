@@ -31,3 +31,31 @@ export const getStudentsReducer = (
       return state;
   }
 };
+
+export const getStudentByIdReducer = (
+  state = {
+    loading: true,
+    student: [],
+  },
+  action
+) => {
+  switch (action.type) {
+    case GET_STUDENT_BY_ID_REQUEST:
+      return {
+        loading: true,
+      };
+    case GET_STUDENT_BY_ID_SUCCESS:
+      return {
+        loading: false,
+        student: action.payload,
+      };
+    case GET_STUDENT_BY_ID_ERROR:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};

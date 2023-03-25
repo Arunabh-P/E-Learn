@@ -7,7 +7,10 @@ import {
   getOneDepartmentReducer,
 } from './reducers/departmentReducer';
 
-import { getStudentsReducer } from './reducers/studentReducer';
+import {
+  getStudentsReducer,
+  getStudentByIdReducer,
+} from './reducers/studentReducer';
 
 import { teacherDetails } from './reducers/teacherReducer';
 const reducers = combineReducers({
@@ -15,6 +18,7 @@ const reducers = combineReducers({
   getDepartmentsReducer,
   getOneDepartmentReducer,
   getStudentsReducer,
+  getStudentByIdReducer,
 });
 
 const store = createStore(

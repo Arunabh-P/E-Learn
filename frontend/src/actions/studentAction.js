@@ -22,3 +22,17 @@ export const getStudentsAction = () => async (dispatch) => {
     dispatch({ type: GET_STUDENT_ERROR });
   }
 };
+
+export const getStudentByIdAction = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_STUDENT_BY_ID_REQUEST });
+    let { data } = await api.fetchOneStudent(id);
+    dispatch({
+      type: GET_STUDENT_BY_ID_SUCCESS,
+      payload: data,
+    });
+  } catch (err) {
+    console.log(err);
+    dispatch({ type: GET_STUDENT_BY_ID_ERROR });
+  }
+};

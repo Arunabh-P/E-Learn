@@ -42,133 +42,21 @@ body {
   font-family: 'Barlow', sans-serif !important;
 }
 
-.trigger {
-  padding: 0 24px;
+.button-1 {
+  background-color: var(--color-skyblue);
+  border: 1px solid var(--color-white);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 400;
   font-size: 18px;
-  line-height: 64px;
-  cursor: pointer;
-  transition: color 0.3s;
+}
+.add-icon {
+  color: var(--color-white);
 }
 
-.trigger:hover {
-  color: var(--color-blue);
-}
-
-.logo {
-  height: 32px;
-  margin: 16px;
-  background-color: #e7f1f6 !important;
-}
-
-.ant-layout {
-  min-height: 100vh;
-  background-color: #fafafa !important;
-}
-.ant-menu-dark,
-.ant-menu-inline,
-.ant-layout-sider,
-.ant-menu {
-  background-color: #ffffff !important;
-}
-
-:where(.css-dev-only-do-not-override-diro6f).ant-menu-dark
-  .ant-menu-item-selected {
-  background-color: #1b4440 !important;
-}
-.sm-logo {
-  display: none;
-  color: var(--color-black);
-}
-.lg-logo {
-  color: var(--color-black);
-}
-.ant-layout-sider-collapsed .sm-logo {
-  display: block;
-}
-.ant-layout-sider-collapsed .lg-logo {
-  display: none;
-}
-main {
-  overflow: scroll;
-}
-main {
-  height: 85vh;
-  overflow-y: scroll;
-  background-color: transparent !important;
-}
-main::-webkit-scrollbar {
-  width: 0px;
-}
-.ant-menu-title-content {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--color-black);
-}
-.ant-menu-submenu-title {
-  color: var(--color-black);
-}
-:where(.css-dev-only-do-not-override-ph9edi).ant-menu-dark
-  .ant-menu-submenu-title:hover:not(.ant-menu-item-selected):not(
-    .ant-menu-submenu-selected
-  ) {
-  color: var(--color-black);
-}
-.ant-menu-item-icon {
-  color: var(--color-black) !important;
-}
-
-:where(.css-dev-only-do-not-override-ph9edi).ant-menu-dark
-  .ant-menu-item-selected {
-  background-color: var(--color-skyblue) !important;
-}
-.ant-menu-item {
-  background-color: transparent !important;
-}
-.ant-layout-header h5 {
-  line-height: 20px;
-  font-size: 14px;
-}
-.ant-layout-header p {
-  line-height: 20px;
-  font-size: 13px;
-}
-.ant-layout-header div .badge {
-  top: 16px;
-  right: -6px;
-}
-
-.green {
-  color: var(--color-green);
-  font-size: 14px;
-  font-family: Roboto !important;
-}
-.red {
-  color: var(--color-red);
-  font-size: 14px;
-  font-family: Roboto !important;
-}
-.quill {
-  background-color: var(--color-white);
-}
-.form-control {
-  box-shadow: none;
-  border-color: var(--color-gray);
-}
 .title {
-  font: 28px;
-  font-family: Roboto !important;
+  font-weight: 400;
   color: var(--color-black);
-}
-
-.sub-title {
-  font: 24px;
-  font-family: Roboto !important;
-  color: var(--color-black);
-}
-.desc {
-  font: 14px;
-  font-family: Roboto !important;
-  color: var(--color-violet);
 }
 
 /* login page */
@@ -236,6 +124,11 @@ main::-webkit-scrollbar {
 /* login page */
 
 /* department */
+.dep-title-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .department-div {
   display: flex;
   flex-wrap: wrap;
@@ -277,26 +170,6 @@ main::-webkit-scrollbar {
   background-color: var(--color-skyblue);
 }
 /* single department page*/
-
-@media only screen and (max-width: 990px) {
-  .login-page-wrapper {
-    flex-direction: column;
-    height: auto;
-    margin: 20px;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  }
-  .login-img-div {
-    width: 100%;
-    height: 240px;
-    border-radius: 0px;
-  }
-  .login-form-div {
-    width: 100%;
-    border-radius: 0px;
-  }
-}
 
 /* sidebar  */
 #sidebar-toggle {
@@ -405,3 +278,36 @@ main::-webkit-scrollbar {
 .page-wrapper {
   padding-left: 6rem;
 }
+
+/* media querry  */
+@media only screen and (max-width: 1540px) {
+  .page-wrapper {
+    padding-left: 7rem;
+  }
+}
+@media only screen and (max-width: 1500px) {
+  .page-wrapper {
+    padding-left: 9rem;
+  }
+}
+@media only screen and (max-width: 990px) {
+  .login-page-wrapper {
+    flex-direction: column;
+    height: auto;
+    margin: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+  .login-img-div {
+    width: 100%;
+    height: 240px;
+    border-radius: 0px;
+  }
+  .login-form-div {
+    width: 100%;
+    border-radius: 0px;
+  }
+}
+
+/* media querry  */
