@@ -1,8 +1,10 @@
 import Teacher from '../model/teacherModel.js';
+import Student from '../model/studentModel.js';
 import Departments from '../model/departmentModel.js';
 import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+
 // create teacher
 export const createTeacher = asyncHandler(async (req, res, next) => {
   try {
@@ -89,7 +91,38 @@ export const getOneDepartment = asyncHandler(async (req, res, next) => {
   }
 });
 
-// // get all teachers
+// @desc    Get students
+// @rout    GET /api/teacher/students
+export const getStudents = asyncHandler(async (req, res, next) => {
+  try {
+    let response = await Student.find().populate('department');
+    if (response) {
+      res.status(200).json({ status: true, students: response });
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+// @desc Get student by id
+// @rout    GET /api/teacher/students/:id
+export const getStudentById = asyncHandler(async (req, res, next) => {
+  try {
+    if (!req.params.id || req.params.id === '') {
+      return res.status(400).send('Student ID is missing or invalid');
+    }
+    const student = await Student.findById(req.params.id);
+    if (!student) {
+      return res.status(404).send('Student not found');
+    }
+
+    res.send(student);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// // // get all teachers
 export const getAllTeachers = asyncHandler(async (req, res, next) => {
   try {
     const teachers = await Teacher.find();

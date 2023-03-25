@@ -13,6 +13,8 @@ export const loginTeacher = (data) => API.post(`/login`, data);
 export const logoutTeacher = () => API.get(`/logout`);
 export const fetchDepartments = () => API.get(`/departments`);
 export const fetchOneDepartment = (id) => API.get(`/departments/${id}`);
+export const fetchStudents = () => API.get(`/students`);
+export const fetchOneStudent = (id) => API.get(`/students/${id}`);
 
 API.interceptors.response.use(
   (response) => {
