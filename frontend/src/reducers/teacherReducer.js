@@ -1,4 +1,10 @@
-import { TEACHER_SIGNIN, TEACHER_SIGNOUT } from '../constants/actionTypes';
+import {
+  TEACHER_SIGNIN,
+  TEACHER_SIGNOUT,
+  GET_TEACHER_REQUEST,
+  GET_TEACHER_SUCCESS,
+  GET_TEACHER_ERROR,
+} from '../constants/actionTypes';
 import { encodeData, decodeData } from '../validations/encryptInfo';
 
 let authData = { teacher: null, loading: false };
@@ -37,5 +43,29 @@ export const teacherDetails = (teacher = authData, action) => {
 
     default:
       return teacher;
+  }
+};
+
+export const getTeachersReducer = (
+  state = { loading: true, teachers: [] },
+  action
+) => {
+  switch (action.type) {
+    case GET_TEACHER_REQUEST:
+      return {
+        loading: true,
+      };
+    case GET_TEACHER_SUCCESS:
+      return {
+        loading: false,
+        teachers: action.payload,
+      };
+    case GET_TEACHER_ERROR:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
   }
 };

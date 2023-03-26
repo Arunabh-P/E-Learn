@@ -27,7 +27,7 @@ const Login = () => {
             <div className="login-form">
               <h1 className="login-Headline text-center mb-3">Sign in</h1>
               <input
-                className="mb-3 login-input"
+                className="mb-3 input-style-1"
                 type="email"
                 name="email"
                 placeholder="Enter Email"
@@ -42,7 +42,7 @@ const Login = () => {
               <input
                 type="password"
                 name="password"
-                className="mb-3 login-input"
+                className="mb-3 input-style-1"
                 placeholder="Enter Password"
                 value={loginData.password}
                 onChange={(e) =>

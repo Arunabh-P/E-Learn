@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import {
   getDepartmentsReducer,
   getOneDepartmentReducer,
+  createDepartmentReducer,
 } from './reducers/departmentReducer';
 
 import {
@@ -12,13 +13,15 @@ import {
   getStudentByIdReducer,
 } from './reducers/studentReducer';
 
-import { teacherDetails } from './reducers/teacherReducer';
+import { teacherDetails, getTeachersReducer } from './reducers/teacherReducer';
 const reducers = combineReducers({
   teacherDetails,
   getDepartmentsReducer,
   getOneDepartmentReducer,
   getStudentsReducer,
   getStudentByIdReducer,
+  getTeachersReducer,
+  createDepartmentReducer,
 });
 
 const store = createStore(

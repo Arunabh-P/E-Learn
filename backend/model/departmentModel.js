@@ -9,6 +9,7 @@ const departmentSchema = new Schema({
   head: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Teacher',
+    required: true,
   },
   students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
   createdAt: { type: Date, default: Date.now },

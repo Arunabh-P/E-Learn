@@ -6,23 +6,25 @@ import {
   createTeacher,
   teacherLogin,
   logoutTeacher,
-  getAllTeachers,
+  getTeachers,
   getATeacher,
   getDepartments,
   getOneDepartment,
   getStudents,
   getStudentById,
+  createDepartment,
 } from '../controller/teacherController.js';
 
 router.post('/login', teacherLogin);
 router.get('/logout', isTeacher, logoutTeacher);
+router.get('/allTeachers', getTeachers);
 router.get('/departments', getDepartments);
 router.get('/departments/:id', getOneDepartment);
 router.get('/students', getStudents);
 router.get('/students/:id', getStudentById);
+router.post('/departments/create', createDepartment);
 
 router.post('/register', isAdmin, createTeacher);
-router.get('/allTeachers', getAllTeachers);
 router.get('/:id', getATeacher);
 
 export default router;

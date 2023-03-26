@@ -65,6 +65,17 @@ export const logoutTeacher = asyncHandler(async (req, res) => {
   res.status(200).clearCookie('teacherToken').send({});
 });
 
+// @desc    Get teachers
+// @rout    GET /api/teacher/teachers
+export const getTeachers = asyncHandler(async (req, res, next) => {
+  try {
+    const teachers = await Teacher.find();
+    res.status(200).json({ status: true, teachers });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // @desc    Get department
 // @rout    GET /api/teacher/department
 export const getDepartments = asyncHandler(async (req, res) => {
@@ -125,17 +136,29 @@ export const getStudentById = asyncHandler(async (req, res, next) => {
   }
 });
 
-// // // get all teachers
-export const getAllTeachers = asyncHandler(async (req, res, next) => {
+// @desc Create department
+// @rout    POST /api/teacher/departments
+export const createDepartment = asyncHandler(async (req, res, next) => {
   try {
-    const teachers = await Teacher.find();
-    res.send(teachers);
+    let { name, head } = req.body;
+    console.log(head, 'heyyyyyyyyy');
+
+    const findDepartment = await Departments.findOne({ name });
+
+    if (findDepartment) {
+      res.status(400).send({ message: 'Department already exists' });
+      return;
+    }
+
+    const department = await Departments.create({ name, head });
+    console.log(department);
+    res.status(201).send(department);
   } catch (error) {
     next(error);
   }
 });
 
-// get a single student by id
+// get a single teacher by id
 export const getATeacher = asyncHandler(async (req, res, next) => {
   try {
     const teacher = await Teacher.findById(req.params.id);

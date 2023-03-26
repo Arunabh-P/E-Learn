@@ -11,8 +11,13 @@ const API = axios.create({
 // Teacher endpoints
 export const loginTeacher = (data) => API.post(`/login`, data);
 export const logoutTeacher = () => API.get(`/logout`);
+export const fetchTeachers = () => API.get(`/allTeachers`);
+
+export const createDepartment = ({ name, head }) =>
+  API.post(`/departments/create`, { name, head });
 export const fetchDepartments = () => API.get(`/departments`);
 export const fetchOneDepartment = (id) => API.get(`/departments/${id}`);
+
 export const fetchStudents = () => API.get(`/students`);
 export const fetchOneStudent = (id) => API.get(`/students/${id}`);
 
