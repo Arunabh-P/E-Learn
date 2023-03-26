@@ -20,16 +20,16 @@ export const isTeacher = asyncHandler(async (req, res, next) => {
 
 export const isAdmin = asyncHandler(async (req, res, next) => {
   try {
-    const { teacherToken } = req.cookies;
-    if (!teacherToken) {
+    const token = req.signedCookies.teacherToken;
+    if (!token) {
       return res.status(401).json({
         message: 'Please login first',
       });
     }
 
-    const decoded = jwt.verify(teacherToken, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.teacher = await Teacher.findById(decoded.teacherId);
+    req.teacher = await Teacher.findById(decoded.id);
 
     if (req.teacher.role === 'admin') {
       next();

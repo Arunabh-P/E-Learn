@@ -27,10 +27,11 @@ const SingleDepartment = () => {
   const headEmail = useSelector(
     (state) => state.getOneDepartmentReducer.department?.head?.email
   );
-  console.log(headEmail);
+
   const { loading, department } = useSelector(
     (state) => state.getOneDepartmentReducer
   );
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const sucesss = await dispatch(
@@ -46,6 +47,7 @@ const SingleDepartment = () => {
       setCreated(true);
     }
   };
+
   useEffect(() => {
     if (created) {
       setModalShow(false);

@@ -18,13 +18,13 @@ import {
 
 router.post('/login', teacherLogin);
 router.get('/logout', isTeacher, logoutTeacher);
-router.get('/allTeachers', getTeachers);
-router.get('/departments', getDepartments);
-router.get('/departments/:id', getOneDepartment);
-router.get('/students', getStudents);
-router.get('/students/:id', getStudentById);
-router.post('/departments/create', createDepartment);
-router.post('/departments/addStudent', createStudent);
+router.get('/allTeachers', isTeacher, getTeachers);
+router.get('/departments', isTeacher, getDepartments);
+router.get('/departments/:id', isTeacher, getOneDepartment);
+router.get('/students', isTeacher, getStudents);
+router.get('/students/:id', isTeacher, getStudentById);
+router.post('/departments/create', isAdmin, createDepartment);
+router.post('/departments/addStudent', isTeacher, createStudent);
 
 router.post('/register', isAdmin, createTeacher);
 router.get('/:id', getATeacher);
