@@ -15,6 +15,7 @@ const Department = () => {
   const [modalShow, setModalShow] = useState(false);
   const [head, setHead] = useState('');
   const [name, setName] = useState('');
+  const [created, setCreated] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -24,12 +25,23 @@ const Department = () => {
   const { teachers } = useSelector((state) => state.getTeachersReducer);
   const { role } = useSelector((state) => state.teacherDetails.teacher);
 
-  // const { details } = useSelector((state) => state.createDepartmentReducer);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createDepartmentAction({ name, head }));
+    const success = await dispatch(createDepartmentAction({ name, head }));
+    if (success) {
+      setModalShow(false);
+      setCreated(true);
+    }
   };
+
+  useEffect(() => {
+    if (created) {
+      setModalShow(false);
+      dispatch(getDepartmentsAction());
+      dispatch(getTeacherAction());
+      setCreated(false);
+    }
+  }, [created, dispatch]);
 
   useEffect(() => {
     dispatch(getDepartmentsAction());
@@ -96,7 +108,7 @@ const Department = () => {
             <input
               type="text"
               name="name"
-              className="input-style-1"
+              className="input-style-2 "
               placeholder="Enter department title"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -106,7 +118,9 @@ const Department = () => {
               name="head"
               value={head}
               onChange={(e) => setHead(e.target.value)}
+              className="input-select-1 mx-1"
             >
+              <option value="">Choose teacher</option>
               {teachers?.map((curElem) => (
                 <option key={curElem?._id} value={curElem?._id}>
                   {curElem?.name}
@@ -116,7 +130,7 @@ const Department = () => {
           </Modal.Body>
           <Modal.Footer>
             {/* <Button>Submit</Button> */}
-            <input type="submit" value="Submit" />
+            <input type="submit" className="button-2" value="Submit" />
           </Modal.Footer>
         </form>
       </Modal>

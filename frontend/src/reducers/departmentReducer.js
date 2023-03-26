@@ -8,6 +8,9 @@ import {
   CREATE_DEPARTMENT_REQUEST,
   CREATE_DEPARTMENT_SUCCESS,
   CREATE_DEPARTMENT_ERROR,
+  CREATE_STUDENT_REQUEST,
+  CREATE_STUDENT_SUCCESS,
+  CREATE_STUDENT_ERROR,
 } from '../constants/actionTypes';
 
 export const getDepartmentsReducer = (
@@ -85,6 +88,34 @@ export const createDepartmentReducer = (
         loading: false,
         error: action.payload,
       };
+    default:
+      return state;
+  }
+};
+
+export const createStudentReducer = (
+  state = {
+    loading: true,
+    student: [],
+  },
+  action
+) => {
+  switch (action.type) {
+    case CREATE_STUDENT_REQUEST:
+      return {
+        loading: true,
+      };
+    case CREATE_STUDENT_SUCCESS:
+      return {
+        loading: false,
+        student: action.payload,
+      };
+    case CREATE_STUDENT_ERROR:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
     default:
       return state;
   }

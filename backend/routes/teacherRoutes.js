@@ -13,6 +13,7 @@ import {
   getStudents,
   getStudentById,
   createDepartment,
+  createStudent,
 } from '../controller/teacherController.js';
 
 router.post('/login', teacherLogin);
@@ -23,6 +24,7 @@ router.get('/departments/:id', getOneDepartment);
 router.get('/students', getStudents);
 router.get('/students/:id', getStudentById);
 router.post('/departments/create', createDepartment);
+router.post('/departments/addStudent', createStudent);
 
 router.post('/register', isAdmin, createTeacher);
 router.get('/:id', getATeacher);

@@ -50,10 +50,40 @@ body {
   font-weight: 400;
   font-size: 18px;
 }
+.button-2 {
+  background-color: var(--color-yellow);
+  border: 1px solid var(--color-white);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 18px;
+}
+.button-2:hover {
+  background-color: var(--color-lite-skyblue);
+}
+
 .add-icon {
   color: var(--color-white);
 }
 
+.input-style-1 {
+  padding: 18px;
+  border-radius: 10px;
+  border: transparent !important;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.input-style-2 {
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid var(--color-gray) !important;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.input-select-1 {
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--color-gray) !important;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
 .title {
   font-weight: 400;
   color: var(--color-black);
@@ -102,12 +132,7 @@ body {
   color: var(--color-black);
   font-weight: 400;
 }
-.input-style-1 {
-  padding: 18px;
-  border-radius: 10px;
-  border: transparent !important;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
+
 .login-btn {
   border: none;
   padding: 18px;

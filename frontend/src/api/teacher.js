@@ -20,6 +20,8 @@ export const fetchOneDepartment = (id) => API.get(`/departments/${id}`);
 
 export const fetchStudents = () => API.get(`/students`);
 export const fetchOneStudent = (id) => API.get(`/students/${id}`);
+export const createStudent = ({ name, email, password, departmentId }) =>
+  API.post('/departments/addStudent', { name, email, password, departmentId });
 
 API.interceptors.response.use(
   (response) => {

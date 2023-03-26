@@ -141,7 +141,6 @@ export const getStudentById = asyncHandler(async (req, res, next) => {
 export const createDepartment = asyncHandler(async (req, res, next) => {
   try {
     let { name, head } = req.body;
-    console.log(head, 'heyyyyyyyyy');
 
     const findDepartment = await Departments.findOne({ name });
 
@@ -153,6 +152,37 @@ export const createDepartment = asyncHandler(async (req, res, next) => {
     const department = await Departments.create({ name, head });
     console.log(department);
     res.status(201).send(department);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// @desc Create student
+// @rout    POST /api/teacher/departments/addStudent
+export const createStudent = asyncHandler(async (req, res, next) => {
+  try {
+    const { name, email, password, departmentId } = req.body;
+
+    const findStudent = await Student.findOne({ email: email });
+
+    if (!findStudent) {
+      const hashedPassword = await bcrypt.hash(password, 12);
+      const student = await Student.create({
+        name,
+        email,
+        password: hashedPassword,
+        departmentId,
+      });
+
+      //update department collection
+      const department = await Departments.findById(departmentId);
+      department.students.push(student._id);
+      await department.save();
+
+      res.status(201).send(student);
+    } else {
+      throw new Error('User already exists');
+    }
   } catch (error) {
     next(error);
   }
