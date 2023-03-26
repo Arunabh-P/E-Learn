@@ -30,6 +30,14 @@ a {
   padding: 0;
   line-height: 28px;
 }
+.table-div {
+  background-color: var(--color-white) !important;
+  padding: 10px !important;
+  border-radius: 10px;
+}
+.table-row:nth-child(odd) {
+  background-color: var(--color-lite-skyblue) !important;
+}
 .main-page {
   background-color: var(--color-lite-gray) !important;
   min-height: 100vh;

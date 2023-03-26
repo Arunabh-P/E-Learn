@@ -56,7 +56,6 @@ export const teacherLogin = asyncHandler(async (req, res) => {
   res
     .status(200)
     .json({ email: teacher.email, name: teacher.name, role: teacher.role });
-  console.log(teacher.role);
 });
 
 // @desc  Logout teacher

@@ -22,27 +22,50 @@ const Students = () => {
           {loading ? (
             <Loading />
           ) : (
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {students.map((curElem) => (
-                  <tr key={curElem?._id}>
-                    <Link to={`/teacher/students/${curElem?._id}`}>
-                      <td>{curElem?.name}</td>
-                    </Link>
-
-                    <td>{curElem?.email}</td>
-                    <td>{curElem?.status}</td>
+            <div className=" table-div">
+              <table className="table table-1">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {students?.map((curElem) => (
+                    <tr className="table-row" key={curElem?._id}>
+                      <td>
+                        <Link
+                          className="p-text"
+                          to={`/teacher/students/${curElem?._id}`}
+                        >
+                          {' '}
+                          {curElem?.name}
+                        </Link>
+                      </td>
+                      <td>
+                        <Link
+                          className="p-text"
+                          to={`/teacher/students/${curElem?._id}`}
+                        >
+                          {' '}
+                          {curElem?.email}
+                        </Link>
+                      </td>
+                      <td>
+                        <Link
+                          className="p-text"
+                          to={`/teacher/students/${curElem?._id}`}
+                        >
+                          {' '}
+                          {curElem?.status}
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </Container>

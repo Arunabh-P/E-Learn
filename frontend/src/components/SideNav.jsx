@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { BiHomeAlt2 } from 'react-icons/bi';
-import { AiOutlineMenuFold } from 'react-icons/ai';
-import { FaClipboardList } from 'react-icons/fa';
+import { AiOutlineMenuFold, AiOutlineCrown } from 'react-icons/ai';
 import { HiOutlineBuildingLibrary } from 'react-icons/hi2';
+import { TfiNotepad } from 'react-icons/tfi';
+
 import { BsPeople } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
@@ -87,9 +88,8 @@ const SideNav = () => {
               )}
             </div>
           </Link>
-
           <Link
-            to="/teacher/tasks"
+            to="/teacher/teachers"
             onClick={() => handleClick('button4')}
             className="sidebar-submenu-link"
             style={{
@@ -97,7 +97,23 @@ const SideNav = () => {
             }}
           >
             <div className="sidebar-submenu-item" data-tooltip="Home">
-              <FaClipboardList style={{ color: 'black' }} className="fs-4" />
+              <AiOutlineCrown style={{ color: 'black' }} className="fs-4" />
+              {!isSidebarReduced && (
+                <span className="sidebar-txt">Teachers</span>
+              )}
+            </div>
+          </Link>
+
+          <Link
+            to="/teacher/tasks"
+            onClick={() => handleClick('button5')}
+            className="sidebar-submenu-link"
+            style={{
+              backgroundColor: activeButton === 'button5' ? '#65b7e5' : '#ffff',
+            }}
+          >
+            <div className="sidebar-submenu-item" data-tooltip="Home">
+              <TfiNotepad style={{ color: 'black' }} className="fs-4" />
               {!isSidebarReduced && <span className="sidebar-txt">Tasks</span>}
             </div>
           </Link>
