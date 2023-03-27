@@ -12,6 +12,7 @@ import NavBar from './components/NavBar';
 import StudentInfo from './pages/StudentInfo';
 import Teachers from './pages/Teachers';
 import TeacherOrStudentPage from './pages/TeacherOrStudentPage';
+import Subject from './pages/Subject';
 function App() {
   const teacher = useSelector((state) => state.teacherDetails.teacher);
   return (
@@ -48,6 +49,10 @@ function App() {
             <Route
               path="students/:id"
               element={teacher ? <StudentInfo /> : <Login />}
+            />
+            <Route
+              path="subjects"
+              element={teacher ? <Subject /> : <Login />}
             />
           </Route>
         </Routes>

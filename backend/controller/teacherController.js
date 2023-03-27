@@ -1,6 +1,7 @@
 import Teacher from '../model/teacherModel.js';
 import Student from '../model/studentModel.js';
 import Departments from '../model/departmentModel.js';
+import Subject from '../model/subjectModel.js';
 import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -181,6 +182,33 @@ export const createStudent = asyncHandler(async (req, res, next) => {
       res.status(201).send(student);
     } else {
       throw new Error('User already exists');
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+// @desc Create Subject
+// @rout    POST /api/teacher/departments/createSubject
+export const createSubject = asyncHandler(async (req, res, next) => {
+  try {
+    let { subject, teacher } = req.body;
+
+    const findSubject = await Subject.findOne({ subject });
+    if (findSubject) {
+      if (findSubject?.teacher.includes(teacher)) {
+        res
+          .status(400)
+          .send({ message: 'Teacher already exists in this subject' });
+      } else {
+        findSubject?.teacher.push(teacher);
+        await findSubject.save();
+        res.status(200).send(findSubject);
+      }
+    } else {
+      const subjects = await Subject.create({ subject, teacher });
+
+      res.status(201).send(subjects);
     }
   } catch (error) {
     next(error);

@@ -6,6 +6,7 @@ const teacherSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   departments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Department' }],
+  subjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Subjects' }],
   role: {
     type: String,
     default: 'teacher',

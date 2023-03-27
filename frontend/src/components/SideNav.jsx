@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { BiHomeAlt2 } from 'react-icons/bi';
+import { BsBook } from 'react-icons/bs';
 import { AiOutlineMenuFold, AiOutlineCrown } from 'react-icons/ai';
 import { HiOutlineBuildingLibrary } from 'react-icons/hi2';
 import { TfiNotepad } from 'react-icons/tfi';
-
 import { BsPeople } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
@@ -103,13 +103,28 @@ const SideNav = () => {
               )}
             </div>
           </Link>
-
           <Link
-            to="/teacher/tasks"
+            to="/teacher/subjects"
             onClick={() => handleClick('button5')}
             className="sidebar-submenu-link"
             style={{
               backgroundColor: activeButton === 'button5' ? '#65b7e5' : '#ffff',
+            }}
+          >
+            <div className="sidebar-submenu-item" data-tooltip="Home">
+              <BsBook style={{ color: 'black' }} className="fs-4" />
+              {!isSidebarReduced && (
+                <span className="sidebar-txt">Subjects</span>
+              )}
+            </div>
+          </Link>
+
+          <Link
+            to="/teacher/tasks"
+            onClick={() => handleClick('button6')}
+            className="sidebar-submenu-link"
+            style={{
+              backgroundColor: activeButton === 'button6' ? '#65b7e5' : '#ffff',
             }}
           >
             <div className="sidebar-submenu-item" data-tooltip="Home">
