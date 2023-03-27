@@ -9,10 +9,17 @@ import {
 } from '../actions/departmentAction';
 import Loading from '../components/Loading';
 import Modal from 'react-bootstrap/Modal';
+import {
+  addSubjectToDepAction,
+  getSubjectAction,
+} from '../actions/subjectAction';
 const SingleDepartment = () => {
   // modal
   const [modalShow, setModalShow] = useState(false);
   const [created, setCreated] = useState(false);
+
+  const [modalShow2, setModalShow2] = useState(false);
+  const [created2, setCreated2] = useState(false);
 
   const params = useParams();
   let departmentId = params.id;
@@ -20,6 +27,7 @@ const SingleDepartment = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [subjectId, setSubjectId] = useState('');
 
   const dispatch = useDispatch();
 
@@ -31,6 +39,11 @@ const SingleDepartment = () => {
   const { loading, department } = useSelector(
     (state) => state.getOneDepartmentReducer
   );
+
+  console.log(department);
+
+  const { subjects } = useSelector((state) => state.getSubjectReducer);
+  console.log(subjects);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,6 +61,28 @@ const SingleDepartment = () => {
     }
   };
 
+  const subjectSubmit = async (e) => {
+    e.preventDefault();
+    const success = await dispatch(
+      addSubjectToDepAction({
+        departmentId,
+        subjectId,
+      })
+    );
+    if (success) {
+      setModalShow2(false);
+      setCreated2(true);
+    }
+  };
+
+  useEffect(() => {
+    if (created2) {
+      setModalShow2(false);
+      dispatch(getOneDepartmentAction(departmentId));
+      setCreated2(false);
+    }
+  }, [created2, dispatch, departmentId]);
+
   useEffect(() => {
     if (created) {
       setModalShow(false);
@@ -58,6 +93,7 @@ const SingleDepartment = () => {
 
   useEffect(() => {
     dispatch(getOneDepartmentAction(departmentId));
+    dispatch(getSubjectAction());
   }, [dispatch, departmentId]);
 
   return (
@@ -94,6 +130,28 @@ const SingleDepartment = () => {
                     <button
                       className="button-1"
                       onClick={() => setModalShow(true)}
+                    >
+                      <IoMdAdd className="add-icon fs-3" />
+                    </button>
+                  ) : (
+                    ''
+                  )}
+                </div>
+                <div className="dep-students-div">
+                  <h5 className="sub-heading">Subjects</h5>
+                  <div className="dep-students-wrapper">
+                    {department?.subjects?.map((curElem) => (
+                      <Link to={`/teacher/students/${curElem?._id}`}>
+                        <div key={curElem?._id} className="dep-student-div">
+                          <p className="p-text">{curElem.subject}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                  {myEmail === headEmail ? (
+                    <button
+                      className="button-1"
+                      onClick={() => setModalShow2(true)}
                     >
                       <IoMdAdd className="add-icon fs-3" />
                     </button>
@@ -146,7 +204,40 @@ const SingleDepartment = () => {
             />
           </Modal.Body>
           <Modal.Footer>
-            {/* <Button>Submit</Button> */}
+            <input type="submit" className="button-2" value="Add Student" />
+          </Modal.Footer>
+        </form>
+      </Modal>
+      <Modal
+        show={modalShow2}
+        onHide={() => setModalShow2(false)}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Add Subject
+          </Modal.Title>
+        </Modal.Header>
+        <form onSubmit={subjectSubmit}>
+          <Modal.Body>
+            <select
+              id="head"
+              name="head"
+              value={subjectId}
+              onChange={(e) => setSubjectId(e.target.value)}
+              className="input-select-1 mx-1 w-100"
+            >
+              <option value="">Choose Subject</option>
+              {subjects?.map((curElem) => (
+                <option key={curElem?._id} value={curElem?._id}>
+                  {curElem?.subject}
+                </option>
+              ))}
+            </select>
+          </Modal.Body>
+          <Modal.Footer>
             <input type="submit" className="button-2" value="Add Student" />
           </Modal.Footer>
         </form>

@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Container, Modal } from 'react-bootstrap';
 import { IoMdAdd } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSubjectAction } from '../actions/subjectAction';
+import { Link } from 'react-router-dom';
+import {
+  createSubjectAction,
+  getSubjectAction,
+} from '../actions/subjectAction';
 import { getTeacherAction } from '../actions/teacherActions';
+import Loading from '../components/Loading';
 
 const Subject = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -16,6 +21,9 @@ const Subject = () => {
   const { teachers } = useSelector((state) => state.getTeachersReducer);
   const { role } = useSelector((state) => state.teacherDetails.teacher);
 
+  const { loading } = useSelector((state) => state.getSubjectReducer);
+  const subjectData = useSelector((state) => state.getSubjectReducer.subjects);
+  console.log(subjectData, 'hey');
   const handleSubmit = async (e) => {
     e.preventDefault();
     const success = await dispatch(createSubjectAction({ subject, teacher }));
@@ -27,27 +35,68 @@ const Subject = () => {
   useEffect(() => {
     if (created) {
       setModalShow(false);
+      dispatch(getTeacherAction());
+      dispatch(getSubjectAction());
       setCreated(false);
     }
   }, [created, dispatch]);
 
   useEffect(() => {
     dispatch(getTeacherAction());
+    dispatch(getSubjectAction());
   }, [dispatch]);
   return (
     <>
       <div className="main-page">
         <Container>
           <div className="page-wrapper pt-4">
-            {role === 'admin' ? (
-              <button
-                className="button-1 mb-3"
-                onClick={() => setModalShow(true)}
-              >
-                <IoMdAdd className="add-icon fs-3" />
-              </button>
+            {loading ? (
+              <Loading />
             ) : (
-              ''
+              <>
+                {role === 'admin' ? (
+                  <button
+                    className="button-1 mb-3"
+                    onClick={() => setModalShow(true)}
+                  >
+                    <IoMdAdd className="add-icon fs-3" />
+                  </button>
+                ) : (
+                  ''
+                )}
+                <div className=" table-div">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Teachers</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {subjectData?.map((curElem) => (
+                        <tr className="table-row" key={curElem?._id}>
+                          <td>
+                            {' '}
+                            <Link
+                              className="p-text"
+                              to={`/teacher/subjects/${curElem?._id}`}
+                            >
+                              {curElem?.subject}
+                            </Link>
+                          </td>
+                          <td>
+                            {curElem?.teacher?.map((curList) => (
+                              <Link className="p-text" key={curList?._id}>
+                                {curList?.name},{' '}
+                              </Link>
+                            ))}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
             )}
           </div>
         </Container>

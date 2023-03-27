@@ -20,6 +20,10 @@ import {
   createTeacherReducer,
 } from './reducers/teacherReducer';
 
+import {
+  getSubjectReducer,
+  createSubjectReducer,
+} from './reducers/subjectReducer';
 const reducers = combineReducers({
   teacherDetails,
   getDepartmentsReducer,
@@ -30,6 +34,8 @@ const reducers = combineReducers({
   createDepartmentReducer,
   createStudentReducer,
   createTeacherReducer,
+  createSubjectReducer,
+  getSubjectReducer,
 });
 
 const store = createStore(

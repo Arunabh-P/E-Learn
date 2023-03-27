@@ -14,7 +14,10 @@ import {
   getStudentById,
   createDepartment,
   createStudent,
+  getSubjectById,
+  getSubjects,
   createSubject,
+  addSubjectToDepartment,
 } from '../controller/teacherController.js';
 
 router.post('/login', teacherLogin);
@@ -28,6 +31,10 @@ router.post('/departments/create', isAdmin, createDepartment);
 router.post('/departments/addStudent', isTeacher, createStudent);
 router.post('/addTeacher', isAdmin, createTeacher);
 router.post('/subjects/createSubject', isAdmin, createSubject);
+router.get('/subjects', isTeacher, getSubjects);
+router.get('/subjects/:id', isTeacher, getSubjectById);
+
+router.post('/departments/addSubject', isTeacher, addSubjectToDepartment);
 
 router.get('/:id', getATeacher);
 

@@ -94,7 +94,7 @@ export const getOneDepartment = asyncHandler(async (req, res, next) => {
       return res.status(400).send('Department ID is missing or invalid');
     }
     const department = await Departments.findById(req.params.id).populate(
-      'head students'
+      'head students subjects'
     );
     if (!department) {
       return res.status(404).send('Department not found');
@@ -210,6 +210,55 @@ export const createSubject = asyncHandler(async (req, res, next) => {
 
       res.status(201).send(subjects);
     }
+  } catch (error) {
+    next(error);
+  }
+});
+
+// @desc    Get Subjects
+// @rout    GET /api/teacher/subjects
+export const getSubjects = asyncHandler(async (req, res) => {
+  let response = await Subject.find().populate('teacher');
+  if (response) {
+    res.status(200).json({ status: true, subjects: response });
+  }
+});
+
+// @desc Get subject by id
+// @rout    GET /api/teacher/subjects/:id
+export const getSubjectById = asyncHandler(async (req, res, next) => {
+  try {
+    if (!req.params.id || req.params.id === '') {
+      return res.status(400).send('Subject ID is missing or invalid');
+    }
+    const subject = await Subject.findById(req.params.id).populate('teacher');
+    if (!subject) {
+      return res.status(404).send('subject not found');
+    }
+
+    res.send(subject);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// @desc add subject to department
+// @rout    POST /api/teacher/departments/addSubject
+export const addSubjectToDepartment = asyncHandler(async (req, res, next) => {
+  try {
+    const { subjectId, departmentId } = req.body;
+
+    const findSubject = await Subject.findById(subjectId);
+    console.log(findSubject, 'subject');
+    const findDepartment = await Departments.findById(departmentId);
+    console.log(findDepartment, 'dep');
+
+    // Add the subject to the department's "subjects" array if it doesn't already exist
+    if (!findDepartment?.subjects?.includes(subjectId)) {
+      findDepartment?.subjects?.push(findSubject._id);
+      await findDepartment.save();
+    }
+    res.send('Subject added to department');
   } catch (error) {
     next(error);
   }

@@ -27,6 +27,11 @@ export const createStudent = ({ name, email, password, departmentId }) =>
 
 export const createSubject = ({ subject, teacher }) =>
   API.post('/subjects/createSubject', { subject, teacher });
+export const fetchSubjects = () => API.get(`/subjects`);
+export const fetchSubjectById = (id) => API.get(`/subjects/${id}`);
+
+export const addSubject = ({ subjectId, departmentId }) =>
+  API.post('/departments/addSubject', { subjectId, departmentId });
 
 API.interceptors.response.use(
   (response) => {

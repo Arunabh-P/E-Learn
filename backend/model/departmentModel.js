@@ -12,6 +12,8 @@ const departmentSchema = new Schema({
     required: true,
   },
   students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
+  subjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Subjects' }],
+
   createdAt: { type: Date, default: Date.now },
 });
 
