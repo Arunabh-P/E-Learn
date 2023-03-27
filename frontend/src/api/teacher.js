@@ -9,6 +9,8 @@ const API = axios.create({
 });
 
 // Teacher endpoints
+export const createTeacher = ({ name, email, password }) =>
+  API.post(`/addTeacher`, { name, email, password });
 export const loginTeacher = (data) => API.post(`/login`, data);
 export const logoutTeacher = () => API.get(`/logout`);
 export const fetchTeachers = () => API.get(`/allTeachers`);

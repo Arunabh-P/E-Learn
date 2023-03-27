@@ -5,16 +5,17 @@ import asyncHandler from 'express-async-handler';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-// create teacher
+// @desc  Create teacher
+// @rout  POST /api/teacher/addTeacher
 export const createTeacher = asyncHandler(async (req, res, next) => {
   try {
-    const email = req.body.email;
+    const { email, name, password } = req.body;
 
     const findteacher = await Teacher.findOne({ email: email });
 
     if (!findteacher) {
-      const hash = bcrypt.hashSync(req.body.password, 5);
-      const teacher = new Teacher({ ...req.body, password: hash });
+      const hashedPassword = await bcrypt.hash(password, 12);
+      const teacher = new Teacher({ email, name, password: hashedPassword });
 
       await teacher.save();
       res.status(201).send(teacher);
@@ -149,7 +150,6 @@ export const createDepartment = asyncHandler(async (req, res, next) => {
     }
 
     const department = await Departments.create({ name, head });
-    console.log(department);
     res.status(201).send(department);
   } catch (error) {
     next(error);

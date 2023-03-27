@@ -129,7 +129,6 @@ const Department = () => {
             </select>
           </Modal.Body>
           <Modal.Footer>
-            {/* <Button>Submit</Button> */}
             <input type="submit" className="button-2" value="Submit" />
           </Modal.Footer>
         </form>

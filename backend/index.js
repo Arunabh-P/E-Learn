@@ -3,7 +3,6 @@ import express from 'express';
 import connectDb from './config/dbConnection.js';
 import studentRoute from './routes/studentRoute.js';
 import teacherRoute from './routes/teacherRoutes.js';
-import departmentRoute from './routes/departmentRoute.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
@@ -33,7 +32,6 @@ app.use(cors({ origin: true, credentials: true }));
 // routes
 app.use('/api/students', studentRoute);
 app.use('/api/teacher', teacherRoute);
-app.use('/api/department', departmentRoute);
 
 const PORT = process.env.PORT;
 

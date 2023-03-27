@@ -3,18 +3,48 @@ import { Container, Modal } from 'react-bootstrap';
 import { IoMdAdd } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getTeacherAction } from '../actions/teacherActions';
+import {
+  createTeacherAction,
+  getTeacherAction,
+} from '../actions/teacherActions';
 import Loading from '../components/Loading';
 
 const Teachers = () => {
   const [modalShow, setModalShow] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [created, setCreated] = useState(false);
+
   const dispatch = useDispatch();
+
   const { teachers, loading } = useSelector(
     (state) => state.getTeachersReducer
   );
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const success = await dispatch(
+      createTeacherAction({ name, email, password })
+    );
+    if (success) {
+      setModalShow(false);
+      setCreated(true);
+    }
+  };
+
+  useEffect(() => {
+    if (created) {
+      setModalShow(false);
+      dispatch(getTeacherAction());
+      setCreated(false);
+    }
+  }, [created, dispatch]);
+
   useEffect(() => {
     dispatch(getTeacherAction());
   }, [dispatch]);
+
   const { role } = useSelector((state) => state.teacherDetails.teacher);
 
   return (
@@ -87,38 +117,35 @@ const Teachers = () => {
             Add Teacher
           </Modal.Title>
         </Modal.Header>
-        <form
-        //  onSubmit={handleSubmit}
-        >
+        <form onSubmit={handleSubmit}>
           <Modal.Body>
             <input
               type="text"
               name="name"
               className="input-style-2 m-2"
               placeholder="Enter name"
-              // value={name}
-              // onChange={(e) => setName(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <input
               type="email"
               name="email"
               className="input-style-2 m-2 "
               placeholder="Enter email"
-              // value={email}
-              // onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
               name="password"
               className="input-style-2 m-2 "
               placeholder="Enter password"
-              // value={password}
-              // onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Modal.Body>
           <Modal.Footer>
-            {/* <Button>Submit</Button> */}
-            <input type="submit" className="button-2" value="Add Student" />
+            <input type="submit" className="button-2" value="Add Teacher" />
           </Modal.Footer>
         </form>
       </Modal>

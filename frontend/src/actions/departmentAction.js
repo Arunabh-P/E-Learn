@@ -70,7 +70,7 @@ export const createStudentAction =
   (name, email, password, departmentId) => async (dispatch) => {
     try {
       dispatch({ type: CREATE_STUDENT_REQUEST });
-      console.log('request');
+
       const config = {
         headers: {
           'Content-Type': 'application/json',

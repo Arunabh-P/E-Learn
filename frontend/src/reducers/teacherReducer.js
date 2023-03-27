@@ -4,6 +4,9 @@ import {
   GET_TEACHER_REQUEST,
   GET_TEACHER_SUCCESS,
   GET_TEACHER_ERROR,
+  CREATE_TEACHER_REQUEST,
+  CREATE_TEACHER_SUCCESS,
+  CREATE_TEACHER_ERROR,
 } from '../constants/actionTypes';
 import { encodeData, decodeData } from '../validations/encryptInfo';
 
@@ -65,6 +68,34 @@ export const getTeachersReducer = (
         loading: false,
         error: action.payload,
       };
+    default:
+      return state;
+  }
+};
+
+export const createTeacherReducer = (
+  state = {
+    loading: true,
+    teacher: [],
+  },
+  action
+) => {
+  switch (action.type) {
+    case CREATE_TEACHER_REQUEST:
+      return {
+        loading: true,
+      };
+    case CREATE_TEACHER_SUCCESS:
+      return {
+        loading: false,
+        teacher: action.payload,
+      };
+    case CREATE_TEACHER_ERROR:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
     default:
       return state;
   }

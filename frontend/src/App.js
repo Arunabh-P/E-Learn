@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import NavBar from './components/NavBar';
 import StudentInfo from './pages/StudentInfo';
 import Teachers from './pages/Teachers';
+import TeacherOrStudentPage from './pages/TeacherOrStudentPage';
 function App() {
   const teacher = useSelector((state) => state.teacherDetails.teacher);
   return (
@@ -20,6 +21,10 @@ function App() {
         {teacher ? <NavBar /> : ''}
 
         <Routes>
+          <Route
+            path=""
+            element={teacher ? <Home /> : <TeacherOrStudentPage />}
+          />
           <Route exact path="/teacher">
             <Route path="" element={teacher ? <Home /> : <Login />} />
             <Route

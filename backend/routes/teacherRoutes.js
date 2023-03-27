@@ -25,8 +25,8 @@ router.get('/students', isTeacher, getStudents);
 router.get('/students/:id', isTeacher, getStudentById);
 router.post('/departments/create', isAdmin, createDepartment);
 router.post('/departments/addStudent', isTeacher, createStudent);
+router.post('/addTeacher', isAdmin, createTeacher);
 
-router.post('/register', isAdmin, createTeacher);
 router.get('/:id', getATeacher);
 
 export default router;
