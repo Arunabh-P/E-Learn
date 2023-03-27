@@ -249,9 +249,7 @@ export const addSubjectToDepartment = asyncHandler(async (req, res, next) => {
     const { subjectId, departmentId } = req.body;
 
     const findSubject = await Subject.findById(subjectId);
-    console.log(findSubject, 'subject');
     const findDepartment = await Departments.findById(departmentId);
-    console.log(findDepartment, 'dep');
 
     // Add the subject to the department's "subjects" array if it doesn't already exist
     if (!findDepartment?.subjects?.includes(subjectId)) {
